@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "429315693134",
+    "firebase_url": "https://golunch-11dd2.firebaseio.com",
+    "project_id": "golunch-11dd2",
+    "storage_bucket": "golunch-11dd2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:429315693134:android:5cc86a1827496c74",
+        "android_client_info": {
+          "package_name": "golunch.mail.ru.golunch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "429315693134-7helsapo5mgs7vi2sk6s48c10l2aveqd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "golunch.mail.ru.golunch",
+            "certificate_hash": "28E0C716C5BCC9FAAAC275644A28CFB330E2118A"
+          }
+        },
+        {
+          "client_id": "429315693134-nt4lq5f849q6oj0o5p20gda146ptn155.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2ZkYx_lYOAcupLlM704A-xRx-khdwKKc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "429315693134-nt4lq5f849q6oj0o5p20gda146ptn155.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
