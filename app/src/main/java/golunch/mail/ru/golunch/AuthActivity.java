@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,6 +21,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import golunch.mail.ru.golunch.helper.GoogleAuthActivity;
+
 public class AuthActivity extends GoogleAuthActivity {
 
     // TODO - добавить account Manager;
@@ -32,7 +33,6 @@ public class AuthActivity extends GoogleAuthActivity {
     @Override
     protected void onMyAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
         if (firebaseAuth.getCurrentUser() != null) {
-            Log.e("LEXA_LOG", "email: "  + firebaseAuth.getCurrentUser().getEmail());
             startActivity(new Intent(AuthActivity.this, MainActivity.class));
         }
     }

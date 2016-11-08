@@ -1,4 +1,4 @@
-package golunch.mail.ru.golunch;
+package golunch.mail.ru.golunch.helper;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

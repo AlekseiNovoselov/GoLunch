@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import golunch.mail.ru.golunch.helper.GoogleAuthActivity;
+
 public class MainActivity extends GoogleAuthActivity {
 
     @Override
@@ -25,8 +27,13 @@ public class MainActivity extends GoogleAuthActivity {
         logOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.signOut();
+                signOut();
             }
         });
+    }
+
+    private void signOut() {
+        // Google+ signOut
+        mAuth.signOut();
     }
 }
