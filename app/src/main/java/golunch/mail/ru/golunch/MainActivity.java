@@ -31,13 +31,8 @@ public class MainActivity extends GoogleAuthActivity {
     private FirebaseAuth auth;
     private DatabaseReference databaseRef;
 
-    private List<Person> persons;
-
+    private List<Organization> organizations;
     private RVAdapter adapter;
-// This method creates an ArrayList that has three Person objects
-// Checkout the project associated with this tutorial on Github if
-// you want to use the same images.
-
 
     @Override
     protected void onMyAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -64,12 +59,10 @@ public class MainActivity extends GoogleAuthActivity {
         LinearLayoutManager llm = new LinearLayoutManager(getBaseContext());
         rv.setLayoutManager(llm);
 
-        persons = new ArrayList<>();
-        adapter = new RVAdapter(persons);
+        organizations = new ArrayList<>();
+        adapter = new RVAdapter(organizations, getBaseContext());
         rv.setAdapter(adapter);
 
-
-        // Get the Firebase app and all primitives we'll use
         app = FirebaseApp.getInstance();
         auth = FirebaseAuth.getInstance(app);
 
@@ -126,14 +119,6 @@ public class MainActivity extends GoogleAuthActivity {
 
     }
 
-
-    private void initializeData(){
-        persons.add(new Person("Emma Wilson", "23 years old", R.drawable.common_google_signin_btn_icon_light));
-        persons.add(new Person("Lavery Maiss", "25 years old", R.drawable.common_full_open_on_phone));
-        persons.add(new Person("Lillie Watts", "35 years old", R.drawable.common_google_signin_btn_icon_light_pressed));
-    }
-
-
     private void signOut() {
         // Google+ signOut
         mAuth.signOut();
@@ -143,8 +128,8 @@ public class MainActivity extends GoogleAuthActivity {
         public void onChildAdded(DataSnapshot snapshot, String s) {
             //Log.e("onChildAdded", "onChildAdded");
             // Get the chat message from the snapshot and add it to the UI
-            Person person = snapshot.getValue(Person.class);
-            adapter.addItem(person);
+            Organization organization = snapshot.getValue(Organization.class);
+            adapter.addItem(organization);
             adapter.notifyDataSetChanged();
         }
 
