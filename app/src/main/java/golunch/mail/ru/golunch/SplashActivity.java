@@ -21,13 +21,15 @@ public class SplashActivity extends GoogleAuthActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         checkAccount();
+        finish();
     }
 
     private void checkAccount() {
-        if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(SplashActivity.this, MainActivity.class));
-        } else {
-            startActivity(new Intent(SplashActivity.this, AuthActivity.class));
-        }
+//        if (mAuth.getCurrentUser() != null) {
+//            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+//        } else {
+//            startActivity(new Intent(SplashActivity.this, AuthActivity.class));
+//        }
+        startActivity(new Intent(SplashActivity.this, MainActivity.class));
     }
 }

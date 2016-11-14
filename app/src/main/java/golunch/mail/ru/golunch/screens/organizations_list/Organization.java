@@ -1,4 +1,4 @@
-package golunch.mail.ru.golunch;
+package golunch.mail.ru.golunch.screens.organizations_list;
 
 public class Organization {
 

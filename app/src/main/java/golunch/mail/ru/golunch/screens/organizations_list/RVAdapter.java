@@ -1,4 +1,4 @@
-package golunch.mail.ru.golunch;
+package golunch.mail.ru.golunch.screens.organizations_list;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +15,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
+import golunch.mail.ru.golunch.R;
+
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
@@ -29,6 +31,10 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
     public void addItem(Organization item) {
         organizations.add(item);
+    }
+
+    public List<Organization> getOrganizations() {
+        return organizations;
     }
 
 
@@ -74,6 +80,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
                     .load(storageReference)
                     .into(imageView);
         }
+
     }
 
     @Override

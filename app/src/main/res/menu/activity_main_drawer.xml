@@ -1,35 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/common_google_signin_btn_icon_dark"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/common_google_signin_btn_icon_light_normal"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/common_google_signin_btn_icon_light"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/common_google_signin_btn_icon_dark_focused"
-            android:title="Tools" />
-    </group>
-
-    <item android:title="Communicate">
+    <item android:title="Меню">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/login"
                 android:icon="@drawable/common_google_signin_btn_icon_light"
-                android:title="Share" />
+                android:title="Вход" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/organizations"
                 android:icon="@drawable/common_google_signin_btn_icon_dark_focused"
-                android:title="Send" />
+                android:title="Заведения" />
+            <item
+                android:id="@+id/my_orders"
+                android:icon="@drawable/common_google_signin_btn_icon_light_normal"
+                android:title="Мои заказы" />
+            <item
+                android:id="@+id/liked"
+                android:icon="@drawable/common_google_signin_btn_icon_light"
+                android:title="Избранное" />
+            <item
+                android:id="@+id/settings"
+                android:icon="@drawable/common_google_signin_btn_icon_dark_focused"
+                android:title="Мои настройки" />
         </menu>
     </item>
 
