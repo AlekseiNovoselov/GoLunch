@@ -8,24 +8,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 import golunch.mail.ru.golunch.R;
 
 public class MenuCategoryAdapter extends RecyclerView.Adapter<MenuCategoryAdapter.MenuItemViewHolder>{
 
-    private List<String> menuCategoties;
+    private ArrayList<MenuCategory> menuCategoties;
     private Context mContext;
 
-    public MenuCategoryAdapter(List<String> menuCategories, Context context){
+    public MenuCategoryAdapter(ArrayList<MenuCategory> menuCategories, Context context){
         this.menuCategoties = menuCategories;
         mContext = context;
     }
 
-    public void addItem(String item) {
+    public void addItem(MenuCategory item) {
         menuCategoties.add(item);
     }
 
-    public List<String> getCategories() {
+    public ArrayList<MenuCategory> getCategories() {
         return menuCategoties;
     }
 
@@ -40,7 +40,7 @@ public class MenuCategoryAdapter extends RecyclerView.Adapter<MenuCategoryAdapte
     @Override
     public void onBindViewHolder(MenuItemViewHolder holder, int position) {
         Log.e("LLL", "text:" + menuCategoties.get(position));
-        holder.name.setText(menuCategoties.get(position));
+        holder.name.setText(menuCategoties.get(position).name);
     }
 
     @Override

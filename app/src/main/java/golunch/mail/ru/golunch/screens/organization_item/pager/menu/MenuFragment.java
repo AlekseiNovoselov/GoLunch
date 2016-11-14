@@ -2,9 +2,9 @@ package golunch.mail.ru.golunch.screens.organization_item.pager.menu;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +12,15 @@ import android.view.ViewGroup;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import golunch.mail.ru.golunch.R;
+import golunch.mail.ru.golunch.screens.dishes_list.DishesPagerFragment;
 import golunch.mail.ru.golunch.screens.organization_item.pager.BaseOrganizationFragment;
+import golunch.mail.ru.golunch.screens.organizations_list.OrganizationListFragment;
 
 public class MenuFragment extends BaseOrganizationFragment {
 
-    List<String> menuItems;
+    ArrayList<MenuCategory> menuItems;
     private MenuCategoryAdapter adapter;
     String organizationName;
 
@@ -48,8 +49,32 @@ public class MenuFragment extends BaseOrganizationFragment {
         View view = inflater.inflate(R.layout.org_item_menu, null);
 
         final RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv2);
+        rv.addOnItemTouchListener(
+                new OrganizationListFragment.RecyclerItemClickListener(getContext(), rv ,new OrganizationListFragment.RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
 
-        //initializeData();
+                        String selectedOrgCat = adapter.getCategories().get(position).orgCat;
+
+                        ArrayList<String> orgCatList = new ArrayList<>();
+                        ArrayList<String> categoriesList = new ArrayList<>();
+                        for (MenuCategory category : adapter.getCategories()) {
+                            orgCatList.add(category.orgCat);
+                            categoriesList.add(category.name);
+                        }
+
+                        FragmentTransaction fTran = getActivity().getSupportFragmentManager().beginTransaction();
+                        DishesPagerFragment dishesListFragment = DishesPagerFragment.newInstance(selectedOrgCat, orgCatList, categoriesList);
+                        fTran.replace(R.id.mainLayout, dishesListFragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }
+
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
+
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         rv.setLayoutManager(llm);
 
@@ -61,15 +86,13 @@ public class MenuFragment extends BaseOrganizationFragment {
 
     @Override
     protected void myOnChildAdded(DataSnapshot snapshot, String s) {
-        MenuCategory menuName = snapshot.getValue(MenuCategory.class);
-        Log.e("LEXA_LOG", "MENU_NAME: " + menuName.name);
-        adapter.addItem(menuName.name);
+        MenuCategory menuCategory = snapshot.getValue(MenuCategory.class);
+        adapter.addItem(menuCategory);
         adapter.notifyDataSetChanged();
     }
 
     @Override
     protected void getDataBaseRef() {
-        Log.e("LEXA_LLLLLLL", "OrgName: " + organizationName);
         databaseRef = database.getReference("menu_categoty");
         // Listen for when child nodes get added to the collection
         databaseRef.orderByChild("organizationName")
