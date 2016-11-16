@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_activity_main);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity
 
         FragmentTransaction fTran = this.getSupportFragmentManager().beginTransaction();
         OrganizationListFragment lobbyFragment = OrganizationListFragment.newInstance();
-        fTran.replace(R.id.mainLayout, lobbyFragment)
+        fTran.replace(R.id.content_main, lobbyFragment)
                 .addToBackStack(null)
                 .commit();
     }
