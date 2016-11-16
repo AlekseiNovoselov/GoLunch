@@ -25,7 +25,7 @@ import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import golunch.mail.ru.golunch.helper.GoogleAuthActivity;
-
+//http://195.19.32.205:22/
 public class AuthActivity extends GoogleAuthActivity {
 
     // TODO - добавить account Manager;
