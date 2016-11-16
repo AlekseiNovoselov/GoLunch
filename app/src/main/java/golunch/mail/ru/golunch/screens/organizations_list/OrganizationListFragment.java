@@ -64,7 +64,7 @@ public class OrganizationListFragment extends Fragment {
 
                         FragmentTransaction fTran = getActivity().getSupportFragmentManager().beginTransaction();
                         OrganizationItemFragment organizationItemFragment = OrganizationItemFragment.newInstance(name);
-                        fTran.replace(R.id.mainLayout, organizationItemFragment)
+                        fTran.replace(R.id.content_main, organizationItemFragment)
                                 .addToBackStack(null)
                                 .commit();
                     }

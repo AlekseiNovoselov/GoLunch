@@ -35,9 +35,9 @@ public class DishesListAdapter extends RecyclerView.Adapter<DishesListAdapter.Di
 
     @Override
     public void onBindViewHolder(DishViewHolder holder, int position) {
-        holder.name.setText(dishes.get(position).name);
-        holder.weight.setText(dishes.get(position).weight);
-        holder.price.setText(dishes.get(position).price);
+        holder.name.setText(dishes.get(position).getName());
+        holder.weight.setText(dishes.get(position).getWeight());
+        holder.price.setText(dishes.get(position).getPrice());
 
         // TODO - отображать иконку;
     }

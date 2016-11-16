@@ -64,7 +64,7 @@ public class MenuFragment extends BaseOrganizationFragment {
 
                         FragmentTransaction fTran = getActivity().getSupportFragmentManager().beginTransaction();
                         DishesPagerFragment dishesListFragment = DishesPagerFragment.newInstance(selectedOrgCat, orgCatList, categoriesList);
-                        fTran.replace(R.id.mainLayout, dishesListFragment)
+                        fTran.replace(R.id.content_main, dishesListFragment)
                                 .addToBackStack(null)
                                 .commit();
                     }
