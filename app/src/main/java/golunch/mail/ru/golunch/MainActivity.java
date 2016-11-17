@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction fTran = this.getSupportFragmentManager().beginTransaction();
         OrganizationListFragment lobbyFragment = OrganizationListFragment.newInstance();
         fTran.replace(R.id.content_main, lobbyFragment)
-                .addToBackStack(null)
                 .commit();
     }
 

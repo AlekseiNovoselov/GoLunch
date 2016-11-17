@@ -41,7 +41,7 @@ abstract public class BaseOrganizationFragment extends Fragment {
         try {
             database = FirebaseDatabase.getInstance(app);
         } catch (DatabaseException ex) {
-            Log.e("Catch", "DatabaseException");
+            Log.e("DatabaseException", ex.toString());
         }
 
         getDataBaseRef();
