@@ -28,7 +28,10 @@ public class SplashActivity extends AppCompatActivity {
         app = FirebaseApp.getInstance();
         auth = FirebaseAuth.getInstance(app);
 
-        auth.signInAnonymously()
+        checkAccount();
+
+        //TODO Uncomment next strings when test on device with network. Or just make new build option
+        /*auth.signInAnonymously()
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
 
                     @Override
@@ -47,7 +50,7 @@ public class SplashActivity extends AppCompatActivity {
                         }
                         // ...
                     }
-                });
+                });*/
     }
 
     private void checkAccount() {

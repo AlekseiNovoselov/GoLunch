@@ -9,17 +9,22 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
+import golunch.mail.ru.golunch.screens.organization_item.OrganizationItemFragment;
 import golunch.mail.ru.golunch.screens.organizations_list.OrganizationListFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private  OrganizationListFragment lobbyFragment = new OrganizationListFragment();
+    private Toolbar toolbar;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_activity_main);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_activity_main);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -32,8 +37,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         FragmentTransaction fTran = this.getSupportFragmentManager().beginTransaction();
-        OrganizationListFragment lobbyFragment = OrganizationListFragment.newInstance();
-        fTran.replace(R.id.content_main, lobbyFragment)
+        OrganizationItemFragment itemFragment = OrganizationItemFragment.newInstance("Hell");
+        fTran.replace(R.id.content_main, itemFragment)
                 .commit();
     }
 
@@ -68,6 +73,16 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void setToolbarTransparent(boolean state) {
+        if (toolbar != null){
+            if (state)
+                toolbar.getBackground().setAlpha(0);
+            else
+                toolbar.getBackground().setAlpha(255);
+        }
+
     }
 
 }
