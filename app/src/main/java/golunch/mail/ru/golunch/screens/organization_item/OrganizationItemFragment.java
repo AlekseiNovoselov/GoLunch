@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import golunch.mail.ru.golunch.R;
+import golunch.mail.ru.golunch.screens.organization_item.pager.additional_info.AdditionalInfoFragment;
+import golunch.mail.ru.golunch.screens.organization_item.pager.feedback.FeedbackFragment;
 import golunch.mail.ru.golunch.screens.organization_item.pager.menu.MenuFragment;
 
 import static golunch.mail.ru.golunch.screens.organization_item.pager.BaseOrganizationFragment.ORGANIZATION_NAME;

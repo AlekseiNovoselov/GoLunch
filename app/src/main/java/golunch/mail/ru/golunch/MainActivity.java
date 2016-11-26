@@ -8,8 +8,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 
+import com.mikepenz.actionitembadge.library.ActionItemBadge;
+import com.mikepenz.actionitembadge.library.ActionItemBadgeAdder;
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+
+import golunch.mail.ru.golunch.screens.basket.BasketFragment;
 import golunch.mail.ru.golunch.screens.organizations_list.OrganizationListFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -68,6 +74,41 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        int badgeCount = 1;
+        //you can add some logic (hide it if the count == 0)
+        if (badgeCount > 0) {
+            ActionItemBadge.update(this, menu.findItem(R.id.item_samplebadge), FontAwesome.Icon.faw_android, ActionItemBadge.BadgeStyles.DARK_GREY, badgeCount);
+        } else {
+            ActionItemBadge.hide(menu.findItem(R.id.item_samplebadge));
+        }
+
+        //If you want to add your ActionItem programmatically you can do this too. You do the following:
+        //new ActionItemBadgeAdder().act(this).menu(menu).title("ОО").itemDetails(0, SAMPLE2_ID, 1).showAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS).add(bigStyle, 1);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.item_samplebadge) {
+
+            FragmentTransaction fTran = this.getSupportFragmentManager().beginTransaction();
+            BasketFragment basketFragment = BasketFragment.newInstance();
+            fTran.replace(R.id.content_main, basketFragment)
+                    .addToBackStack(null)
+                    .commit();
+
+            ActionItemBadge.update(item, 2);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

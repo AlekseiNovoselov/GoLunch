@@ -28,6 +28,14 @@ dependencies {
     compile 'com.android.support:design:25.0.0'
     compile 'com.android.support:recyclerview-v7:25.0.0'
 
+    compile 'com.mikepenz:actionitembadge:3.3.0@aar'
+    compile 'com.google.code.gson:gson:2.2.4'
+
+    //SUB-DEPENDENCIES
+    //Android-Iconics - used to provide an easy API for icons
+    compile 'com.mikepenz:iconics-core:2.8.0@aar'
+    compile 'com.mikepenz:fontawesome-typeface:4.7.0.0@aar'
+
     compile 'com.google.firebase:firebase-auth:9.8.0'
     compile 'com.google.android.gms:play-services-auth:9.8.0'
     compile 'com.google.firebase:firebase-database:9.8.0'
