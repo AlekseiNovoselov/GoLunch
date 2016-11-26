@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -13,5 +13,37 @@
     </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- DishItemStyles -->
+
+    <!--<style name="DishItemBase">-->
+        <!--<item name="android:layout_width">0dp</item>-->
+        <!--<item name="android:layout_height">wrap_content</item>-->
+        <!--<item name="android:layout_marginLeft">@dimen/dish_info_item_left_margin</item>-->
+        <!--<item name="android:layout_marginRight">@dimen/dish_info_item_left_margin</item>-->
+        <!--<item name="android:layout_marginStart" tools:targetApi="jelly_bean_mr1">@dimen/dish_info_item_left_margin</item>-->
+        <!--<item name="android:layout_marginEnd" tools:targetApi="jelly_bean_mr1">@dimen/dish_info_item_left_margin</item>-->
+        <!--<item name="android:layout_marginTop">@dimen/dish_item_top_margin_normal</item>-->
+    <!--</style>-->
+
+    <style name="DishItemPrice">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/dish_item_price_text_size</item>
+    </style>
+
+    <style name="DishItemFullName">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/dish_item_title_text_size</item>
+    </style>
+
+    <style name="DishItemValue">
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">@dimen/dish_item_normal_text_size</item>
+    </style>
+
+    <style name="DishItemSubTitle">
+        <item name="android:textColor">@color/light_grey</item>
+        <item name="android:textSize">@dimen/dish_item_normal_text_size</item>
+    </style>
 
 </resources>

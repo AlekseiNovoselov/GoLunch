@@ -1,6 +1,8 @@
 package golunch.mail.ru.golunch.screens.dishes_list;
 
-public class Dish {
+import java.io.Serializable;
+
+public class Dish implements Serializable {
 
     private String indexOrgCat;
     private String icon;

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import golunch.mail.ru.golunch.R;
 
@@ -24,6 +25,10 @@ public class DishesListAdapter extends RecyclerView.Adapter<DishesListAdapter.Di
 
     public void addItem(Dish item) {
         dishes.add(item);
+    }
+
+    public List<Dish> getDishes() {
+        return dishes;
     }
 
     @Override
