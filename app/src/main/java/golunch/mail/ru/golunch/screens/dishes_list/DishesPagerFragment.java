@@ -15,8 +15,6 @@ import java.util.ArrayList;
 
 import golunch.mail.ru.golunch.R;
 
-import static golunch.mail.ru.golunch.screens.organization_item.pager.BaseOrganizationFragment.ORGANIZATION_NAME;
-
 public class DishesPagerFragment extends Fragment {
 
     public final static String ORG_CAT = "ORG_CAT";
@@ -84,4 +82,13 @@ public class DishesPagerFragment extends Fragment {
         }
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        pagerAdapter = new DishesPagerFragment.MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
+        pager.setAdapter(pagerAdapter);
+        pagerAdapter.notifyDataSetChanged();
+    }
+
 }
