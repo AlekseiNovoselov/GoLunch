@@ -1,12 +1,11 @@
 package golunch.mail.ru.golunch.screens.basket;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,7 @@ public class BasketFragment extends Fragment {
 
     private List<Dish> dishes;
     private BasketAdapter adapter;
+    private RecyclerView rv;
 
 
     public static BasketFragment newInstance() {
@@ -37,18 +37,7 @@ public class BasketFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.basket, null);
 
-        final RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv);
-        rv.addOnItemTouchListener(
-                new OrganizationListFragment.RecyclerItemClickListener(getContext(), rv ,new OrganizationListFragment.RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
-
-                    }
-
-                    @Override public void onLongItemClick(View view, int position) {
-                        // do whatever
-                    }
-                })
-        );
+        rv = (RecyclerView) view.findViewById(R.id.rv);
 
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         rv.setLayoutManager(llm);
@@ -56,9 +45,30 @@ public class BasketFragment extends Fragment {
         BuyHelper buyHelper = new BuyHelper(getContext());
         dishes = buyHelper.getDishList();
 
-        adapter = new BasketAdapter(dishes, getContext());
+        adapter = new BasketAdapter(dishes, new BasketAdapter.MyAdapterListener() {
+
+            @Override
+            public void iconClearOnClick(View v, int position) {
+                Log.d("LEXA_LOG", "Clear position "+position);
+            }
+
+            @Override
+            public void iconRemoveOnClick(View v, int position) {
+                Log.d("LEXA_LOG", "Remove at position "+position);
+                dishes.remove(position);
+                BuyHelper buyHelper = new BuyHelper(getContext());
+                buyHelper.saveDishList(dishes);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void iconAddOnClick(View v, int position) {
+                Log.d("LEXA_LOG", "Add at position "+position);
+            }
+        });
         rv.setAdapter(adapter);
 
         return view;
     }
+
 }
