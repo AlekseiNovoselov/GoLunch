@@ -13,8 +13,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
+import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
 
 public class DishItemFragment extends Fragment {
@@ -25,6 +27,7 @@ public class DishItemFragment extends Fragment {
     private TextView mComposition;
     private TextView mDescription;
     private ImageView mAddButton;
+    private BadgeHelper badgeHelper;
 
     private static final String SELECTED_DISH = "SELECTED_DISH";
     private Dish mDish;
@@ -53,6 +56,7 @@ public class DishItemFragment extends Fragment {
         View view = inflater.inflate(R.layout.dish_item_info, null);
 
         buyHelper = new BuyHelper(getContext());
+        badgeHelper = new BadgeHelper((MainActivity)getActivity());
 
         mFullName = (TextView) view.findViewById(R.id.fullName);
         mPrice = (TextView) view.findViewById(R.id.price);
@@ -75,6 +79,7 @@ public class DishItemFragment extends Fragment {
                 }
                 dishList.add(mDish);
                 buyHelper.saveDishList(dishList);
+                badgeHelper.updateBadge(BadgeHelper.BADGE.SHOP);
             }
         });
 

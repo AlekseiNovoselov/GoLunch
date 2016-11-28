@@ -11,17 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import java.util.List;
 
+import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
+import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
-import golunch.mail.ru.golunch.screens.organizations_list.OrganizationListFragment;
 
 public class BasketFragment extends Fragment {
 
     private List<Dish> dishes;
     private BasketAdapter adapter;
     private RecyclerView rv;
-
+    private BadgeHelper badgeHelper;
 
     public static BasketFragment newInstance() {
 
@@ -37,6 +38,8 @@ public class BasketFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.basket, null);
 
+        badgeHelper = new BadgeHelper((MainActivity) getActivity());
+        badgeHelper.updateBadge(BadgeHelper.BADGE.BASKET);
         rv = (RecyclerView) view.findViewById(R.id.rv);
 
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
@@ -59,6 +62,7 @@ public class BasketFragment extends Fragment {
                 BuyHelper buyHelper = new BuyHelper(getContext());
                 buyHelper.saveDishList(dishes);
                 adapter.notifyDataSetChanged();
+                badgeHelper.updateBadge(BadgeHelper.BADGE.BASKET);
             }
 
             @Override

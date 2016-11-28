@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
+import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.organization_item.pager.additional_info.AdditionalInfoFragment;
 import golunch.mail.ru.golunch.screens.organization_item.pager.feedback.FeedbackFragment;
 import golunch.mail.ru.golunch.screens.organization_item.pager.menu.MenuFragment;
@@ -55,6 +57,7 @@ public class OrganizationItemFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View view = inflater.inflate(R.layout.org_item, null);
+        new BadgeHelper((MainActivity) getActivity()).updateBadge(BadgeHelper.BADGE.SHOP);
 
         pager = (ViewPager) view.findViewById(R.id.pager);
         pagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());

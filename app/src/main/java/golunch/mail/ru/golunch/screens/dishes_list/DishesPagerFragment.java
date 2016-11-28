@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
+import golunch.mail.ru.golunch.helper.BadgeHelper;
 
 public class DishesPagerFragment extends Fragment {
 
@@ -46,6 +48,7 @@ public class DishesPagerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.dishes_pager, null);
+        new BadgeHelper((MainActivity) getActivity()).updateBadge(BadgeHelper.BADGE.SHOP);
 
         orgCat = getArguments().getString(ORG_CAT);
         orgCatList = getArguments().getStringArrayList(ORG_CAT_LIST);
