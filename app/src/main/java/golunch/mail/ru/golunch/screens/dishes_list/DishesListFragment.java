@@ -2,6 +2,7 @@ package golunch.mail.ru.golunch.screens.dishes_list;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import com.google.firebase.database.DataSnapshot;
 import java.util.ArrayList;
 
 import golunch.mail.ru.golunch.R;
+import golunch.mail.ru.golunch.screens.dish_item.DishItemFragment;
+import golunch.mail.ru.golunch.screens.organization_item.OrganizationItemFragment;
 import golunch.mail.ru.golunch.screens.organization_item.pager.BaseOrganizationFragment;
 import golunch.mail.ru.golunch.screens.organizations_list.OrganizationListFragment;
 
@@ -70,6 +73,13 @@ public class DishesListFragment extends BaseOrganizationFragment {
                 new OrganizationListFragment.RecyclerItemClickListener(getContext(), rv ,new OrganizationListFragment.RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
 
+                        Dish dish = adapter.getDishes().get(position);
+
+                        FragmentTransaction fTran = getActivity().getSupportFragmentManager().beginTransaction();
+                        DishItemFragment dishItemFragment = DishItemFragment.newInstance(dish);
+                        fTran.replace(R.id.content_main, dishItemFragment)
+                                .addToBackStack(null)
+                                .commit();
                     }
 
                     @Override public void onLongItemClick(View view, int position) {

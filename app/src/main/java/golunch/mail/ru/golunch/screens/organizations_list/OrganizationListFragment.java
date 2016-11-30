@@ -27,7 +27,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
+import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.organization_item.OrganizationItemFragment;
 
 public class OrganizationListFragment extends Fragment {
@@ -39,7 +41,6 @@ public class OrganizationListFragment extends Fragment {
 
     private List<Organization> organizations;
     private RVAdapter adapter;
-
 
     public static OrganizationListFragment newInstance() {
         OrganizationListFragment organizationListFragment = new OrganizationListFragment();

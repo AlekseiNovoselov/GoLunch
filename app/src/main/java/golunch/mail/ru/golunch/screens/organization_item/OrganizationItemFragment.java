@@ -2,10 +2,8 @@ package golunch.mail.ru.golunch.screens.organization_item;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -13,11 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
+import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.organization_item.pager.additional_info.AdditionalInfoFragment;
 import golunch.mail.ru.golunch.screens.organization_item.pager.feedback.FeedbackFragment;
 import golunch.mail.ru.golunch.screens.organization_item.pager.menu.MenuFragment;
@@ -29,7 +25,6 @@ public class OrganizationItemFragment extends Fragment {
     private static final int PAGE_COUNT = 3;
     ViewPager pager;
     PagerAdapter pagerAdapter;
-    TabLayout tabLayout;
 
     String organizationName;
 
@@ -48,58 +43,95 @@ public class OrganizationItemFragment extends Fragment {
         organizationName = getArguments().getString(ORGANIZATION_NAME);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        pagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
+        pager.setAdapter(pagerAdapter);
+        pagerAdapter.notifyDataSetChanged();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View view = inflater.inflate(R.layout.org_item, null);
-        if (getActivity() != null)
-            ((MainActivity) getActivity()).setToolbarTransparent(true);
+        new BadgeHelper((MainActivity) getActivity()).updateBadge(BadgeHelper.BADGE.SHOP);
 
         pager = (ViewPager) view.findViewById(R.id.pager);
-        setupViewPager(pager);
-        tabLayout = (TabLayout) view.findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(pager);
+        pagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
+        pager.setAdapter(pagerAdapter);
+        pagerAdapter.notifyDataSetChanged();
+
+
+        pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int position) {
+                //Log.d(TAG, "onPageSelected, position = " + position);
+                switch (position) {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset,
+                                       int positionOffsetPixels) {
+                // critical Section for performance
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         return view;
     }
 
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFragment(MenuFragment.newInstance(organizationName), "Меню");
-        adapter.addFragment(AdditionalInfoFragment.newInstance(organizationName), "Доп");
-        adapter.addFragment(FeedbackFragment.newInstance(organizationName), "Отзывы");
-        viewPager.setAdapter(adapter);
-    }
+    private class MyFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
+        public MyFragmentPagerAdapter(FragmentManager fm) {
+            super(getActivity().getSupportFragmentManager());
         }
 
         @Override
         public Fragment getItem(int position) {
-            return mFragmentList.get(position);
+            switch (position) {
+                case 0:
+                    return MenuFragment.newInstance(organizationName);
+                case 1:
+                    return AdditionalInfoFragment.newInstance(organizationName);
+                case 2:
+                    return FeedbackFragment.newInstance(organizationName);
+                default:
+                    return MenuFragment.newInstance(organizationName);
+            }
         }
 
         @Override
         public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
+            return PAGE_COUNT;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
+            switch (position) {
+                case 0:
+                    return "Меню";
+                case 1:
+                    return "Доп.Инфо";
+                case 2:
+                    return "Отзывы";
+                default:
+                    return "хз";
+            }
         }
+
     }
 
 }

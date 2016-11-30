@@ -20,7 +20,6 @@ import golunch.mail.ru.golunch.R;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
-
     private List<Organization> organizations;
     private Context mContext;
 

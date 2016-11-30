@@ -6,4 +6,9 @@
     <string name="splash_first">Совершайте предзаказ в заведениях</string>
     <string name="golunch">GoLunch</string>
 
+
+    <!-- Dish item -->
+    <string name="dish_item_composition">Состав:</string>
+    <string name="dish_item_description">Описание:</string>
+
 </resources>

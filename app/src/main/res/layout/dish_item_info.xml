@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.constraint.Guideline
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45"
+        tools:layout_editor_absoluteY="230dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_light_focused"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/fullName"
+        style="@style/DishItemFullName"
+        tools:text="Филадельфия премиум"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dish_info_item_left_margin"
+        android:layout_marginRight="@dimen/dish_info_item_left_margin"
+        android:layout_marginStart="@dimen/dish_info_item_left_margin"
+        android:layout_marginEnd="@dimen/dish_info_item_left_margin"
+        android:layout_marginTop="@dimen/dish_item_top_margin_normal"
+
+
+        app:layout_constraintTop_toTopOf="@+id/imageButton" />
+
+    <TextView
+        android:id="@+id/price"
+        style="@style/DishItemPrice"
+        tools:text="3999 P"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dish_info_item_left_margin"
+        android:layout_marginRight="@dimen/dish_info_item_left_margin"
+        android:layout_marginStart="@dimen/dish_info_item_left_margin"
+        android:layout_marginEnd="@dimen/dish_info_item_left_margin"
+        android:layout_marginTop="@dimen/dish_item_top_margin_normal"
+
+
+        app:layout_constraintTop_toBottomOf="@+id/fullName"
+        app:layout_constraintHorizontal_bias="0.0" />
+
+    <TextView
+        android:id="@+id/weight"
+        style="@style/DishItemValue"
+        tools:text="200 гр."
+        android:layout_marginTop="@dimen/dish_item_top_margin_large"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dish_info_item_left_margin"
+        android:layout_marginRight="@dimen/dish_info_item_left_margin"
+        android:layout_marginStart="@dimen/dish_info_item_left_margin"
+        android:layout_marginEnd="@dimen/dish_info_item_left_margin"
+
+        app:layout_constraintTop_toBottomOf="@+id/price" />
+
+    <TextView
+        android:id="@+id/composition_title"
+        style="@style/DishItemSubTitle"
+        android:text="@string/dish_item_composition"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dish_info_item_left_margin"
+        android:layout_marginRight="@dimen/dish_info_item_left_margin"
+        android:layout_marginStart="@dimen/dish_info_item_left_margin"
+        android:layout_marginEnd="@dimen/dish_info_item_left_margin"
+        android:layout_marginTop="@dimen/dish_item_top_margin_normal"
+
+
+        app:layout_constraintTop_toBottomOf="@+id/weight" />
+
+    <TextView
+        android:id="@+id/composition_value"
+        style="@style/DishItemValue"
+        tools:text="Лосось, сливочный сыр, огурец"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dish_info_item_left_margin"
+        android:layout_marginRight="@dimen/dish_info_item_left_margin"
+        android:layout_marginStart="@dimen/dish_info_item_left_margin"
+        android:layout_marginEnd="@dimen/dish_info_item_left_margin"
+        android:layout_marginTop="@dimen/dish_item_top_margin_normal"
+
+
+        app:layout_constraintTop_toBottomOf="@+id/composition_title" />
+
+    <TextView
+        android:id="@+id/description_title"
+        android:text="@string/dish_item_description"
+        style="@style/DishItemSubTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dish_info_item_left_margin"
+        android:layout_marginRight="@dimen/dish_info_item_left_margin"
+        android:layout_marginStart="@dimen/dish_info_item_left_margin"
+        android:layout_marginEnd="@dimen/dish_info_item_left_margin"
+        android:layout_marginTop="@dimen/dish_item_top_margin_normal"
+
+        app:layout_constraintTop_toBottomOf="@+id/composition_value" />
+
+    <TextView
+        android:id="@+id/description_value"
+        style="@style/DishItemValue"
+        android:inputType="textMultiLine"
+        tools:text="Классика, которая не нуждается в представлении"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dish_info_item_left_margin"
+        android:layout_marginRight="@dimen/dish_info_item_left_margin"
+        android:layout_marginStart="@dimen/dish_info_item_left_margin"
+        android:layout_marginEnd="@dimen/dish_info_item_left_margin"
+        android:layout_marginTop="@dimen/dish_item_top_margin_normal"
+        app:layout_constraintTop_toBottomOf="@+id/description_title" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@drawable/ic_add_white_24"
+        android:layout_marginRight="@dimen/dish_info_item_left_margin"
+        android:layout_marginEnd="@dimen/dish_info_item_left_margin"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/price"
+        app:layout_constraintBottom_toBottomOf="@+id/price" />
+
+</android.support.constraint.ConstraintLayout>

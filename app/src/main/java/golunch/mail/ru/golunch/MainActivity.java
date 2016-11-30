@@ -2,29 +2,30 @@ package golunch.mail.ru.golunch;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.WindowManager;
 
-import golunch.mail.ru.golunch.screens.organization_item.OrganizationItemFragment;
+import golunch.mail.ru.golunch.helper.BadgeHelper;
+import golunch.mail.ru.golunch.screens.basket.BasketFragment;
 import golunch.mail.ru.golunch.screens.organizations_list.OrganizationListFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private  OrganizationListFragment lobbyFragment = new OrganizationListFragment();
-    private Toolbar toolbar;
+    private Menu mMenu;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_activity_main);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -37,8 +38,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         FragmentTransaction fTran = this.getSupportFragmentManager().beginTransaction();
-        OrganizationItemFragment itemFragment = OrganizationItemFragment.newInstance("Hell");
-        fTran.replace(R.id.content_main, itemFragment)
+        OrganizationListFragment lobbyFragment = OrganizationListFragment.newInstance();
+        fTran.replace(R.id.content_main, lobbyFragment)
                 .commit();
     }
 
@@ -75,14 +76,32 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void setToolbarTransparent(boolean state) {
-        if (toolbar != null){
-            if (state)
-                toolbar.getBackground().setAlpha(0);
-            else
-                toolbar.getBackground().setAlpha(255);
-        }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        mMenu = menu;
+        BadgeHelper badgeHelper = new BadgeHelper(MainActivity.this);
+        badgeHelper.updateBadge(BadgeHelper.BADGE.SHOP);
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.item_samplebadge) {
+
+            FragmentTransaction fTran = this.getSupportFragmentManager().beginTransaction();
+            BasketFragment basketFragment = BasketFragment.newInstance();
+            fTran.replace(R.id.content_main, basketFragment)
+                    .addToBackStack(null)
+                    .commit();
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public Menu getMenu() {
+        return mMenu;
+    }
 }
