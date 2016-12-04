@@ -3,6 +3,7 @@ package golunch.mail.ru.golunch;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 
 import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.basket.BasketFragment;
+import golunch.mail.ru.golunch.screens.orders.OrdersPagerFragment;
 import golunch.mail.ru.golunch.screens.organizations_list.OrganizationListFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -60,6 +62,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.my_orders) {
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            FragmentTransaction fTran = this.getSupportFragmentManager().beginTransaction();
+            OrdersPagerFragment ordersPagerFragment = OrdersPagerFragment.newInstance();
+            fTran.replace(R.id.content_main, ordersPagerFragment)
+                    .commit();
 
         } else if (id == R.id.liked) {
 
@@ -68,7 +75,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.login) {
 
         } else if (id == R.id.organizations) {
-
+                getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                FragmentTransaction fTran = this.getSupportFragmentManager().beginTransaction();
+                OrganizationListFragment lobbyFragment = OrganizationListFragment.newInstance();
+                fTran.replace(R.id.content_main, lobbyFragment)
+                    .commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

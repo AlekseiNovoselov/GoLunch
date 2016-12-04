@@ -6,9 +6,13 @@ import com.mikepenz.actionitembadge.library.ActionItemBadge;
 import com.mikepenz.actionitembadge.library.utils.BadgeStyle;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 
+import java.util.List;
+
 import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
+import golunch.mail.ru.golunch.screens.dishes_list.Dish;
+import golunch.mail.ru.golunch.screens.organizations_list.RVAdapter;
 
 public class BadgeHelper {
 
@@ -25,7 +29,11 @@ public class BadgeHelper {
     }
 
     public void updateBadge(BADGE badge) {
-        int badgeCount = buyHelper.getDishList().size();
+        List<Dish> dishList = buyHelper.getDishList();
+        if (dishList == null) {
+            return;
+        }
+        int badgeCount = dishList.size();
         if (badgeCount > 0) {
             ActionItemBadge.update(mActivity, mActivity.getMenu().findItem(R.id.item_samplebadge),
                     getBadgeResource(badge),
