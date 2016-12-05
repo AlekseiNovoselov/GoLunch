@@ -16,6 +16,7 @@ import golunch.mail.ru.golunch.screens.dishes_list.Dish;
 public class BuyHelper {
 
     public static final String DISH_LIST = "DISH_LIST";
+    public static final String ORGANIZATION_NAME = "ORGANIZATION_NAME";
     private Context mContext;
 
     public BuyHelper(Context context) {
@@ -39,5 +40,19 @@ public class BuyHelper {
         String jsonDishes = appSharedPrefs.getString(DISH_LIST, "");
         Gson gson = new Gson();
         return gson.fromJson(jsonDishes, type);
+    }
+
+    public void saveSelectedOrganizationName(String name) {
+        SharedPreferences appSharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+        prefsEditor.putString(ORGANIZATION_NAME, name);
+        prefsEditor.apply();
+    }
+
+    public String getCurrentOrganizationName() {
+        SharedPreferences appSharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(mContext);
+        return appSharedPrefs.getString(ORGANIZATION_NAME, null);
     }
 }

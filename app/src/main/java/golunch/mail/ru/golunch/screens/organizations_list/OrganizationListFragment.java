@@ -29,6 +29,7 @@ import java.util.List;
 
 import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
+import golunch.mail.ru.golunch.buy.BuyHelper;
 import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.organization_item.OrganizationItemFragment;
 
@@ -41,6 +42,8 @@ public class OrganizationListFragment extends Fragment {
 
     private List<Organization> organizations;
     private RVAdapter adapter;
+
+    private BuyHelper buyHelper;
 
     public static OrganizationListFragment newInstance() {
         OrganizationListFragment organizationListFragment = new OrganizationListFragment();
@@ -55,6 +58,7 @@ public class OrganizationListFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View view = inflater.inflate(R.layout.organization_list_fragment, null);
+        buyHelper = new BuyHelper(getContext());
 
         final RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv);
         rv.addOnItemTouchListener(
@@ -62,6 +66,7 @@ public class OrganizationListFragment extends Fragment {
                     @Override public void onItemClick(View view, int position) {
 
                         String name = adapter.getOrganizations().get(position).name;
+                        buyHelper.saveSelectedOrganizationName(name);
 
                         FragmentTransaction fTran = getActivity().getSupportFragmentManager().beginTransaction();
                         OrganizationItemFragment organizationItemFragment = OrganizationItemFragment.newInstance(name);
@@ -91,7 +96,7 @@ public class OrganizationListFragment extends Fragment {
             database = FirebaseDatabase.getInstance(app);
             FirebaseDatabase.getInstance(app).setPersistenceEnabled(true);
         } catch (DatabaseException ex) {
-            Log.e("Catch", "DatabaseException");
+            Log.e("Catch", "DatabaseException:" + ex.toString());
         }
 
         databaseRef = database.getReference("cafe_list");
@@ -110,34 +115,6 @@ public class OrganizationListFragment extends Fragment {
                 }
             }
         });
-
-
-        DatabaseReference connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
-        connectedRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                boolean connected = snapshot.getValue(Boolean.class);
-                if (connected) {
-                    //Log.e("connectedRef", "connected");
-                    databaseRef.onDisconnect();
-                    databaseRef = database.getReference("chat_2v");
-                    // Listen for when child nodes get added to the collection
-                    if (adapter.getItemCount() == 0) {
-                        databaseRef.limitToLast(100)
-                                .addChildEventListener(new MyChildEventListener());
-
-                    }
-                } else {
-                    //Log.e("connectedRef", "NOT connected");
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                //Log.e("connectedRef", "Listener was cancelled");
-            }
-        });
-
 
         return view;
     }

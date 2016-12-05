@@ -93,4 +93,8 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketView
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
+
+    public void clearData() {
+        dishes.clear();
+    }
 }
