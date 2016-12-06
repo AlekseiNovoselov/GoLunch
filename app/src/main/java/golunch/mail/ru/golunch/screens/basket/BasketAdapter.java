@@ -12,10 +12,15 @@ import java.util.List;
 
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
+import golunch.mail.ru.golunch.screens.organizations_list.Organization;
 
 public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketViewHolder>{
 
     public MyAdapterListener onClickListener;
+
+    public void addItem(Dish dish) {
+        dishes.add(dish);
+    }
 
     public interface MyAdapterListener {
 

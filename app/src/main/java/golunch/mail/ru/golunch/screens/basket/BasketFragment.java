@@ -65,7 +65,7 @@ public class BasketFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.basket, null);
+        View view = inflater.inflate(R.layout.order_list, null);
 
         byuHelper = new BuyHelper(getContext());
 
