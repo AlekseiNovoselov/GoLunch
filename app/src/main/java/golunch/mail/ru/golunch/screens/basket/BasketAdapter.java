@@ -16,7 +16,12 @@ import golunch.mail.ru.golunch.screens.organizations_list.Organization;
 
 public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketViewHolder>{
 
+    public enum BEHAVIOR {
+        BASKET, ORDER
+    }
+
     public MyAdapterListener onClickListener;
+    private BEHAVIOR behavior;
 
     public void addItem(Dish dish) {
         dishes.add(dish);
@@ -32,8 +37,9 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketView
     private List<Dish> dishes;
 
 
-    public BasketAdapter(List<Dish> dishes, MyAdapterListener listener) {
+    public BasketAdapter(List<Dish> dishes, BEHAVIOR behavior, MyAdapterListener listener) {
         this.dishes = dishes;
+        this.behavior = behavior;
         onClickListener = listener;
     }
 
@@ -79,18 +85,27 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketView
             add = (Button)itemView.findViewById(R.id.add);
             clear = (Button)itemView.findViewById(R.id.clear);
 
-            clear.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onClickListener.iconRemoveOnClick(v, getAdapterPosition());
-                }
-            });
-            add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onClickListener.iconClearOnClick(v, getAdapterPosition());
-                }
-            });
+            switch (behavior) {
+                case BASKET:
+                    clear.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            onClickListener.iconRemoveOnClick(v, getAdapterPosition());
+                        }
+                    });
+                    add.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            onClickListener.iconClearOnClick(v, getAdapterPosition());
+                        }
+                    });
+                    break;
+                case ORDER:
+                    clear.setVisibility(View.GONE);
+                    add.setVisibility(View.GONE);
+                    remove.setVisibility(View.GONE);
+                    break;
+            }
         }
     }
 

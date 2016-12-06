@@ -1,4 +1,4 @@
-package golunch.mail.ru.golunch.screens.orders;
+package golunch.mail.ru.golunch.screens.orders.order_list;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -39,6 +39,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     public void addItem(OrderItem orderItem) {
         orders.add(orderItem);
+    }
+
+    public final List<OrderItem> getOrders() {
+        return orders;
     }
 
     public class OrderViewHolder extends RecyclerView.ViewHolder {

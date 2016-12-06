@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 
 import golunch.mail.ru.golunch.R;
-import golunch.mail.ru.golunch.screens.dishes_list.DishesListFragment;
+import golunch.mail.ru.golunch.screens.orders.order_list.OrderListFragment;
 
 public class OrdersPagerFragment extends Fragment {
 

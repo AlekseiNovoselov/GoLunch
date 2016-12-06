@@ -81,7 +81,7 @@ public class BasketFragment extends Fragment {
         BuyHelper buyHelper = new BuyHelper(getContext());
         dishes = buyHelper.getDishList();
 
-        adapter = new BasketAdapter(dishes, new BasketAdapter.MyAdapterListener() {
+        adapter = new BasketAdapter(dishes, BasketAdapter.BEHAVIOR.BASKET, new BasketAdapter.MyAdapterListener() {
 
             @Override
             public void iconClearOnClick(View v, int position) {
@@ -149,6 +149,9 @@ public class BasketFragment extends Fragment {
         if (organizationName == null) {
             Log.e(LOG_TAG, "organizationName == null");
             showErrorDialog("Не выбрано заведение");
+        }
+        if (dishes.size() == 0) {
+            showErrorDialog("Ничего не выбрано");
         }
         cafeField.put(ORDER_CAFE_NAME, organizationName);
         ref.setValue(cafeField , new DatabaseReference.CompletionListener() {

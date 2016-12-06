@@ -1,4 +1,4 @@
-package golunch.mail.ru.golunch.screens.orders;
+package golunch.mail.ru.golunch.screens.orders.order_list;
 
 public class OrderItem {
 
