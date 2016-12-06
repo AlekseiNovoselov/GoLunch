@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 
 import golunch.mail.ru.golunch.R;
+import golunch.mail.ru.golunch.firebase.FireBaseConfiguration;
 import golunch.mail.ru.golunch.screens.orders.order_list.OrderListFragment;
 
 public class OrdersPagerFragment extends Fragment {
@@ -54,7 +55,21 @@ public class OrdersPagerFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            return OrderListFragment.newInstance();
+            FireBaseConfiguration.ORDER_STATE_ENUM state;
+            switch (position) {
+                case 0:
+                    state = FireBaseConfiguration.ORDER_STATE_ENUM.NEW;
+                    break;
+                case 1:
+                    state = FireBaseConfiguration.ORDER_STATE_ENUM.PAID;
+                    break;
+                case 2:
+                    state = FireBaseConfiguration.ORDER_STATE_ENUM.CANCELLED;
+                    break;
+                default:
+                    state = FireBaseConfiguration.ORDER_STATE_ENUM.CANCELLED;
+            }
+            return OrderListFragment.newInstance(state);
         }
 
         @Override
@@ -75,7 +90,14 @@ public class OrdersPagerFragment extends Fragment {
                     return "хз";
             }
         }
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        pagerAdapter = new OrdersPagerFragment.MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
+        pager.setAdapter(pagerAdapter);
+        pagerAdapter.notifyDataSetChanged();
     }
 
 }

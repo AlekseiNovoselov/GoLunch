@@ -104,9 +104,9 @@ public class OrderDetailsListFragment extends Fragment {
                     dishes.add(value);
                     adapter.addItem(value);
                     Log.e("FIRST_DISH_NAME", "key: " + key + " value: " + value.getName());
+                    adapter.notifyDataSetChanged();
                 }
             }
-            adapter.notifyDataSetChanged();
         }
 
         public void onChildChanged(DataSnapshot dataSnapshot, String s) { }

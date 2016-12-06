@@ -31,8 +31,10 @@ import golunch.mail.ru.golunch.buy.BuyHelper;
 import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
 
+import static android.provider.CallLog.Calls.NEW;
 import static golunch.mail.ru.golunch.firebase.FireBaseConfiguration.ORDER_DISHES;
 import static golunch.mail.ru.golunch.firebase.FireBaseConfiguration.ORDER_CAFE_NAME;
+import static golunch.mail.ru.golunch.screens.orders.order_list.OrderListFragment.ORDER_STATE;
 
 public class BasketFragment extends Fragment {
 
@@ -154,6 +156,7 @@ public class BasketFragment extends Fragment {
             showErrorDialog("Ничего не выбрано");
         }
         cafeField.put(ORDER_CAFE_NAME, organizationName);
+        cafeField.put(ORDER_STATE, NEW.toUpperCase());
         ref.setValue(cafeField , new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {

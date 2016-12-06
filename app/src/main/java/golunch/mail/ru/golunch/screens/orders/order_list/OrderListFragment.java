@@ -28,7 +28,8 @@ import java.util.Map;
 
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
-import golunch.mail.ru.golunch.screens.basket.BasketFragment;
+import golunch.mail.ru.golunch.firebase.FireBaseConfiguration;
+import golunch.mail.ru.golunch.screens.basket.Order;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
 import golunch.mail.ru.golunch.screens.orders.details.OrderDetailsListFragment;
 import golunch.mail.ru.golunch.screens.organizations_list.OrganizationListFragment;
@@ -47,11 +48,15 @@ public class OrderListFragment extends Fragment {
     private List<OrderSet> orderItems;
 
     private BuyHelper buyHelper;
+    private FireBaseConfiguration.ORDER_STATE_ENUM orderState;
 
-    public static OrderListFragment newInstance() {
+    public final static String ORDER_STATE = "ORDER_STATE";
+
+    public static OrderListFragment newInstance(FireBaseConfiguration.ORDER_STATE_ENUM orderState) {
 
         OrderListFragment orderListFragment = new OrderListFragment();
         Bundle arguments = new Bundle();
+        arguments.putString(ORDER_STATE, orderState.toString());
         orderListFragment.setArguments(arguments);
 
         return orderListFragment;
@@ -60,6 +65,7 @@ public class OrderListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         orderItems = new ArrayList<>();
+        orderState = FireBaseConfiguration.ORDER_STATE_ENUM.valueOf(getArguments().getString(ORDER_STATE));
         super.onCreate(savedInstanceState);
     }
 
@@ -122,6 +128,7 @@ public class OrderListFragment extends Fragment {
             OrderSet orderSet = snapshot.getValue(OrderSet.class);
             Log.e("CAFE_NAME", "onChildAdded: " + orderSet.ORDER_CAFE_ID);
             HashMap<String, Dish> orderDishes = orderSet.ORDER_DISHES;
+            String state = orderSet.ORDER_STATE;
             if (orderDishes != null) {
                 for (Map.Entry<String, Dish> entry : orderDishes.entrySet()) {
                     String key = entry.getKey();
@@ -130,10 +137,17 @@ public class OrderListFragment extends Fragment {
                 }
             }
             OrderItem orderItem = new OrderItem(snapshot.getKey(), orderSet.ORDER_CAFE_ID);
-            orderItems.add(orderSet);
-            adapter.addItem(orderItem);
-            adapter.notifyDataSetChanged();
-            updateViewState();
+            if (FireBaseConfiguration.ORDER_STATE_ENUM.valueOf(state) == orderState) {
+                for (OrderItem oItem : adapter.getOrders()) {
+                    if (oItem.getOrderId().equals(snapshot.getKey())) {
+                        return;
+                    }
+                }
+                orderItems.add(orderSet);
+                adapter.addItem(orderItem);
+                adapter.notifyDataSetChanged();
+                updateViewState();
+            }
         }
 
         public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
