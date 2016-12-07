@@ -83,7 +83,7 @@ public class BasketFragment extends Fragment {
         BuyHelper buyHelper = new BuyHelper(getContext());
         dishes = buyHelper.getDishList();
 
-        adapter = new BasketAdapter(dishes, BasketAdapter.BEHAVIOR.BASKET, new BasketAdapter.MyAdapterListener() {
+        adapter = new BasketAdapter(getContext(), dishes, BasketAdapter.BEHAVIOR.BASKET, new BasketAdapter.MyAdapterListener() {
 
             @Override
             public void iconClearOnClick(View v, int position) {

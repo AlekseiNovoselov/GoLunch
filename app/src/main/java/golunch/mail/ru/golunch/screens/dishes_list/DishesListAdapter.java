@@ -8,10 +8,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import golunch.mail.ru.golunch.R;
+
+import static golunch.mail.ru.golunch.firebase.FireBaseConfiguration.FIREBASE_DB_URL;
 
 public class DishesListAdapter extends RecyclerView.Adapter<DishesListAdapter.DishViewHolder> {
 
@@ -43,7 +50,17 @@ public class DishesListAdapter extends RecyclerView.Adapter<DishesListAdapter.Di
         holder.weight.setText(dishes.get(position).getWeight());
         holder.price.setText(dishes.get(position).getPrice());
 
-        // TODO - отображать иконку;
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReferenceFromUrl(FIREBASE_DB_URL);
+        if (dishes.get(position).getIcon() != null) {
+            StorageReference storageReference = storageRef.child(dishes.get(position).getIcon());
+            // Load the image using Glide
+            Glide.with(mContext)
+                    .using(new FirebaseImageLoader())
+                    .load(storageReference)
+                    .into(holder.icon);
+        }
+
     }
 
     @Override

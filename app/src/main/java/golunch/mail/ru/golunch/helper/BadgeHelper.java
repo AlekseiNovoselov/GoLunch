@@ -34,14 +34,16 @@ public class BadgeHelper {
         }
         int badgeCount = dishList.size();
         if (badgeCount > 0) {
-            ActionItemBadge.update(mActivity, mActivity.getMenu().findItem(R.id.item_samplebadge),
-                    getBadgeResource(badge),
-                    new BadgeStyle(BadgeStyle.Style.DEFAULT,
-                            com.mikepenz.actionitembadge.library.R.layout.menu_action_item_badge,
-                            Color.LTGRAY,
-                            Color.WHITE,
-                            Color.BLACK),
-                    badgeCount);
+            if (mActivity.getMenu() != null) {
+                ActionItemBadge.update(mActivity, mActivity.getMenu().findItem(R.id.item_samplebadge),
+                        getBadgeResource(badge),
+                        new BadgeStyle(BadgeStyle.Style.DEFAULT,
+                                com.mikepenz.actionitembadge.library.R.layout.menu_action_item_badge,
+                                Color.LTGRAY,
+                                Color.WHITE,
+                                Color.BLACK),
+                        badgeCount);
+            }
         } else {
             if (mActivity.getMenu() != null) {
                 ActionItemBadge.hide(mActivity.getMenu().findItem(R.id.item_samplebadge));

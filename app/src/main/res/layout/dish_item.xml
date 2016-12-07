@@ -8,8 +8,8 @@
         android:id="@+id/icon"
         android:layout_alignParentLeft="true"
         android:src="@drawable/common_google_signin_btn_icon_light"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="72dp"
+        android:layout_height="72dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"

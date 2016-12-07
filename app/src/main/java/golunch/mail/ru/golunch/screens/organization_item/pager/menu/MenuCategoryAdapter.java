@@ -6,10 +6,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import golunch.mail.ru.golunch.R;
+
+import static golunch.mail.ru.golunch.firebase.FireBaseConfiguration.FIREBASE_DB_URL;
 
 public class MenuCategoryAdapter extends RecyclerView.Adapter<MenuCategoryAdapter.MenuItemViewHolder>{
 
@@ -41,6 +49,18 @@ public class MenuCategoryAdapter extends RecyclerView.Adapter<MenuCategoryAdapte
     public void onBindViewHolder(MenuItemViewHolder holder, int position) {
         Log.e("LLL", "text:" + menuCategoties.get(position));
         holder.name.setText(menuCategoties.get(position).name);
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReferenceFromUrl(FIREBASE_DB_URL);
+        if (menuCategoties.get(position).icon != null) {
+            StorageReference storageReference = storageRef.child(menuCategoties.get(position).icon);
+            // Load the image using Glide
+            Glide.with(mContext)
+                    .using(new FirebaseImageLoader())
+                    .load(storageReference)
+                    .into(holder.icon);
+        }
+
     }
 
     @Override
@@ -50,11 +70,13 @@ public class MenuCategoryAdapter extends RecyclerView.Adapter<MenuCategoryAdapte
 
     public static class MenuItemViewHolder extends RecyclerView.ViewHolder {
         RecyclerView rv;
+        ImageView icon;
         TextView name;
 
         MenuItemViewHolder(View itemView) {
             super(itemView);
             rv = (RecyclerView) itemView.findViewById(R.id.rv);
+            icon = (ImageView) itemView.findViewById(R.id.icon);
             name = (TextView)itemView.findViewById(R.id.category_name);
         }
     }

@@ -71,7 +71,7 @@ public class OrderDetailsListFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         rv.setLayoutManager(llm);
 
-        adapter = new BasketAdapter(dishes, BasketAdapter.BEHAVIOR.ORDER, null);
+        adapter = new BasketAdapter(getContext(), dishes, BasketAdapter.BEHAVIOR.ORDER, null);
         rv.setAdapter(adapter);
 
         app = FirebaseApp.getInstance();

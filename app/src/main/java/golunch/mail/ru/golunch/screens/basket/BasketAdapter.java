@@ -1,5 +1,6 @@
 package golunch.mail.ru.golunch.screens.basket;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +9,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.List;
 
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
 import golunch.mail.ru.golunch.screens.organizations_list.Organization;
+
+import static golunch.mail.ru.golunch.firebase.FireBaseConfiguration.FIREBASE_DB_URL;
 
 public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketViewHolder>{
 
@@ -35,11 +43,13 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketView
     }
 
     private List<Dish> dishes;
+    private Context context;
 
 
-    public BasketAdapter(List<Dish> dishes, BEHAVIOR behavior, MyAdapterListener listener) {
+    public BasketAdapter(Context context, List<Dish> dishes, BEHAVIOR behavior, MyAdapterListener listener) {
         this.dishes = dishes;
         this.behavior = behavior;
+        this.context = context;
         onClickListener = listener;
     }
 
@@ -55,6 +65,17 @@ public class BasketAdapter extends RecyclerView.Adapter<BasketAdapter.BasketView
         holder.full_name.setText(dishes.get(position).getName());
         holder.price.setText(dishes.get(position).getPrice());
         holder.description.setText(dishes.get(position).getName());
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReferenceFromUrl(FIREBASE_DB_URL);
+        if (dishes.get(position).getIcon() != null) {
+            StorageReference storageReference = storageRef.child(dishes.get(position).getIcon());
+            // Load the image using Glide
+            Glide.with(context)
+                    .using(new FirebaseImageLoader())
+                    .load(storageReference)
+                    .into(holder.preview);
+        }
     }
 
     @Override

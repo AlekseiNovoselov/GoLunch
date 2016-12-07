@@ -2,6 +2,7 @@ package golunch.mail.ru.golunch.screens.organization_item.pager.menu;
 
 public class MenuCategory {
 
+    public String icon;
     public String name;
     public String organizationName;
     public String orgCat;
