@@ -10,6 +10,12 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
@@ -18,21 +24,28 @@ import golunch.mail.ru.golunch.screens.organization_item.pager.additional_info.A
 import golunch.mail.ru.golunch.screens.organization_item.pager.feedback.FeedbackFragment;
 import golunch.mail.ru.golunch.screens.organization_item.pager.menu.MenuFragment;
 
+import static golunch.mail.ru.golunch.firebase.FireBaseConfiguration.FIREBASE_DB_URL;
 import static golunch.mail.ru.golunch.screens.organization_item.pager.BaseOrganizationFragment.ORGANIZATION_NAME;
 
 public class OrganizationItemFragment extends Fragment {
 
     private static final int PAGE_COUNT = 3;
+
+    private final static String BANNER_NAME = "BANNER_NAME";
+
     ViewPager pager;
     PagerAdapter pagerAdapter;
+    private ImageView banner;
+    private String bannerName;
 
     String organizationName;
 
-    public static OrganizationItemFragment newInstance(String organizationName) {
+    public static OrganizationItemFragment newInstance(String organizationName, String bannerName) {
 
         OrganizationItemFragment organizationItemFragment = new OrganizationItemFragment();
         Bundle arguments = new Bundle();
         arguments.putString(ORGANIZATION_NAME, organizationName);
+        arguments.putString(BANNER_NAME, bannerName);
         organizationItemFragment.setArguments(arguments);
         return organizationItemFragment;
     }
@@ -41,6 +54,7 @@ public class OrganizationItemFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         organizationName = getArguments().getString(ORGANIZATION_NAME);
+        bannerName = getArguments().getString(BANNER_NAME);
     }
 
     @Override
@@ -57,6 +71,8 @@ public class OrganizationItemFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View view = inflater.inflate(R.layout.org_item, null);
+        banner = (ImageView) view.findViewById(R.id.banner);
+
         new BadgeHelper((MainActivity) getActivity()).updateBadge(BadgeHelper.BADGE.SHOP);
 
         pager = (ViewPager) view.findViewById(R.id.pager);
@@ -64,6 +80,7 @@ public class OrganizationItemFragment extends Fragment {
         pager.setAdapter(pagerAdapter);
         pagerAdapter.notifyDataSetChanged();
 
+        drawBanner();
 
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -91,6 +108,21 @@ public class OrganizationItemFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void drawBanner() {
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReferenceFromUrl(FIREBASE_DB_URL);
+        if (bannerName != null) {
+            StorageReference storageReference = storageRef.child(bannerName);
+
+            // Load the image using Glide
+            Glide.with(getContext())
+                    .using(new FirebaseImageLoader())
+                    .load(storageReference)
+                    .into(banner);
+        }
+
     }
 
     private class MyFragmentPagerAdapter extends FragmentStatePagerAdapter {

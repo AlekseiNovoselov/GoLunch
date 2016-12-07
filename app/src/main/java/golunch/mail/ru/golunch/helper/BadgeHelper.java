@@ -12,7 +12,6 @@ import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
-import golunch.mail.ru.golunch.screens.organizations_list.RVAdapter;
 
 public class BadgeHelper {
 
@@ -44,7 +43,9 @@ public class BadgeHelper {
                             Color.BLACK),
                     badgeCount);
         } else {
-            ActionItemBadge.hide(mActivity.getMenu().findItem(R.id.item_samplebadge));
+            if (mActivity.getMenu() != null) {
+                ActionItemBadge.hide(mActivity.getMenu().findItem(R.id.item_samplebadge));
+            }
         }
     }
 

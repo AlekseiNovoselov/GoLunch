@@ -17,13 +17,15 @@ import java.util.List;
 
 import golunch.mail.ru.golunch.R;
 
+import static golunch.mail.ru.golunch.firebase.FireBaseConfiguration.FIREBASE_DB_URL;
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
+
+public class OrganizationsListAdapter extends RecyclerView.Adapter<OrganizationsListAdapter.PersonViewHolder>{
 
     private List<Organization> organizations;
     private Context mContext;
 
-    public RVAdapter(List<Organization> organizations, Context context){
+    public OrganizationsListAdapter(List<Organization> organizations, Context context){
         this.organizations = organizations;
         mContext = context;
     }
@@ -66,7 +68,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
         // Reference to an image file in Firebase Storage
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReferenceFromUrl("gs://golunch-11dd2.appspot.com/");
+        StorageReference storageRef = storage.getReferenceFromUrl(FIREBASE_DB_URL);
         if (organizations.get(position).photoName != null) {
             StorageReference storageReference = storageRef.child(organizations.get(position).photoName);
 

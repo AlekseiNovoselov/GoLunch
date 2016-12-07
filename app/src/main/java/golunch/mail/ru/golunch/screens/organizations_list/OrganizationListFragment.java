@@ -22,15 +22,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
-import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.organization_item.OrganizationItemFragment;
 
 public class OrganizationListFragment extends Fragment {
@@ -41,7 +38,7 @@ public class OrganizationListFragment extends Fragment {
     private DatabaseReference databaseRef;
 
     private List<Organization> organizations;
-    private RVAdapter adapter;
+    private OrganizationsListAdapter adapter;
 
     private BuyHelper buyHelper;
 
@@ -65,11 +62,12 @@ public class OrganizationListFragment extends Fragment {
                 new RecyclerItemClickListener(getContext(), rv ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
 
-                        String name = adapter.getOrganizations().get(position).name;
-                        buyHelper.saveSelectedOrganizationName(name);
+                        String organizationName = adapter.getOrganizations().get(position).name;
+                        String bannerName = adapter.getOrganizations().get(position).bannerName;
+                        buyHelper.saveSelectedOrganizationName(organizationName);
 
                         FragmentTransaction fTran = getActivity().getSupportFragmentManager().beginTransaction();
-                        OrganizationItemFragment organizationItemFragment = OrganizationItemFragment.newInstance(name);
+                        OrganizationItemFragment organizationItemFragment = OrganizationItemFragment.newInstance(organizationName, bannerName);
                         fTran.replace(R.id.content_main, organizationItemFragment)
                                 .addToBackStack(null)
                                 .commit();
@@ -86,7 +84,7 @@ public class OrganizationListFragment extends Fragment {
         rv.setLayoutManager(llm);
 
         organizations = new ArrayList<>();
-        adapter = new RVAdapter(organizations, getContext());
+        adapter = new OrganizationsListAdapter(organizations, getContext());
         rv.setAdapter(adapter);
 
         app = FirebaseApp.getInstance();
