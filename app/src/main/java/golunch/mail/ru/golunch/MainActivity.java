@@ -68,6 +68,9 @@ public class MainActivity extends AppCompatActivity
             fTran.replace(R.id.content_main, ordersPagerFragment)
                     .commit();
 
+            android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar_activity_main);
+            toolbar.setTitle("Мои заказы");
+
         } else if (id == R.id.liked) {
 
         } else if (id == R.id.settings) {
@@ -75,11 +78,15 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.login) {
 
         } else if (id == R.id.organizations) {
+
                 getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 FragmentTransaction fTran = this.getSupportFragmentManager().beginTransaction();
                 OrganizationListFragment lobbyFragment = OrganizationListFragment.newInstance();
                 fTran.replace(R.id.content_main, lobbyFragment)
                     .commit();
+
+                android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar_activity_main);
+                toolbar.setTitle("Заведения");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

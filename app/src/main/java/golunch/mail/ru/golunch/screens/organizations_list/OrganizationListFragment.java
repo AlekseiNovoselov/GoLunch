@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
 import golunch.mail.ru.golunch.screens.organization_item.OrganizationItemFragment;
@@ -174,5 +175,12 @@ public class OrganizationListFragment extends Fragment {
 
         @Override
         public void onRequestDisallowInterceptTouchEvent (boolean disallowIntercept){}
+    }
+
+    @Override
+    public void onResume() {
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) ((MainActivity)getActivity()).findViewById(R.id.toolbar_activity_main);
+        toolbar.setTitle("Заведения");
+        super.onResume();
     }
 }

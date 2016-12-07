@@ -218,4 +218,11 @@ public class BasketFragment extends Fragment {
             checkout.setVisibility(View.VISIBLE);
         }
     }
+
+    @Override
+    public void onResume() {
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) ((MainActivity)getActivity()).findViewById(R.id.toolbar_activity_main);
+        toolbar.setTitle("Корзина");
+        super.onResume();
+    }
 }

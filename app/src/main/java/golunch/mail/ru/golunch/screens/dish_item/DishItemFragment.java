@@ -108,4 +108,11 @@ public class DishItemFragment extends Fragment {
         return view;
     }
 
+
+    @Override
+    public void onResume() {
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) ((MainActivity)getActivity()).findViewById(R.id.toolbar_activity_main);
+        toolbar.setTitle(mDish.getName());
+        super.onResume();
+    }
 }

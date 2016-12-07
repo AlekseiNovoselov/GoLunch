@@ -63,6 +63,11 @@ public class OrganizationItemFragment extends Fragment {
         pagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
         pager.setAdapter(pagerAdapter);
         pagerAdapter.notifyDataSetChanged();
+
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) ((MainActivity)getActivity()).findViewById(R.id.toolbar_activity_main);
+        toolbar.setTitle(organizationName);
+        super.onResume();
+
     }
 
     @Nullable
@@ -165,5 +170,4 @@ public class OrganizationItemFragment extends Fragment {
         }
 
     }
-
 }
