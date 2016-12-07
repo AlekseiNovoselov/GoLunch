@@ -10,6 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +24,8 @@ import golunch.mail.ru.golunch.buy.BuyHelper;
 import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
 
+import static golunch.mail.ru.golunch.firebase.FireBaseConfiguration.FIREBASE_DB_URL;
+
 public class DishItemFragment extends Fragment {
 
     private TextView mFullName;
@@ -27,6 +34,8 @@ public class DishItemFragment extends Fragment {
     private TextView mComposition;
     private TextView mDescription;
     private ImageView mAddButton;
+    private ImageView banner;
+
     private BadgeHelper badgeHelper;
 
     private static final String SELECTED_DISH = "SELECTED_DISH";
@@ -55,6 +64,8 @@ public class DishItemFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.dish_item_info, null);
 
+        banner = (ImageView) view.findViewById(R.id.dishBanner);
+
         buyHelper = new BuyHelper(getContext());
         badgeHelper = new BadgeHelper((MainActivity)getActivity());
 
@@ -68,8 +79,8 @@ public class DishItemFragment extends Fragment {
         mFullName.setText(mDish.getName());
         mPrice.setText(mDish.getPrice());
         mWright.setText(mDish.getWeight());
-//        mComposition.setText(mDish.getComposition());
-//        mDescription.setText(mDish.getCDescription());
+        mComposition.setText(mDish.getComposition());
+        mDescription.setText(mDish.getDescription());
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +93,17 @@ public class DishItemFragment extends Fragment {
                 badgeHelper.updateBadge(BadgeHelper.BADGE.SHOP);
             }
         });
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReferenceFromUrl(FIREBASE_DB_URL);
+        if (mDish.getBannerName() != null) {
+            StorageReference storageReference = storageRef.child(mDish.getBannerName());
+            Glide.with(getContext())
+                    .using(new FirebaseImageLoader())
+                    .load(storageReference)
+                    .into(banner);
+        }
+
 
         return view;
     }

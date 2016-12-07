@@ -10,16 +10,22 @@ public class Dish implements Serializable {
     private String weight;
     private String price;
 
+    private String composition;
+    private String description;
+    private String bannerName;
+
     public Dish() {
 
     }
 
-    public Dish(String icon, String name, String weight, String price, String indexOrgCat) {
+    public Dish(String icon, String name, String weight, String price, String indexOrgCat,
+                String bannerName) {
         this.icon = icon;
         this.name = name;
         this.weight = weight;
         this.price = price;
         this.indexOrgCat = indexOrgCat;
+        this.bannerName = bannerName;
     }
 
     public String getIndexOrgCat() {
@@ -60,5 +66,17 @@ public class Dish implements Serializable {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getBannerName() {
+        return bannerName;
+    }
+
+    public String getComposition() {
+        return composition;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
