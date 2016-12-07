@@ -5,23 +5,23 @@
         <menu>
             <item
                 android:id="@+id/login"
-                android:icon="@drawable/common_google_signin_btn_icon_light"
+                android:icon="@drawable/ic_person_black_24px"
                 android:title="Вход" />
             <item
                 android:id="@+id/organizations"
-                android:icon="@drawable/common_google_signin_btn_icon_dark_focused"
+                android:icon="@drawable/ic_home_black_24px"
                 android:title="Заведения" />
             <item
                 android:id="@+id/my_orders"
-                android:icon="@drawable/common_google_signin_btn_icon_light_normal"
+                android:icon="@drawable/ic_history_black_24px"
                 android:title="Мои заказы" />
             <item
                 android:id="@+id/liked"
-                android:icon="@drawable/common_google_signin_btn_icon_light"
+                android:icon="@drawable/ic_stars_black_24px"
                 android:title="Избранное" />
             <item
                 android:id="@+id/settings"
-                android:icon="@drawable/common_google_signin_btn_icon_dark_focused"
+                android:icon="@drawable/ic_settings_black_24px"
                 android:title="Мои настройки" />
         </menu>
     </item>

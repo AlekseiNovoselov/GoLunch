@@ -55,7 +55,6 @@ public class OrderDetailsListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         orderId = getArguments().getString(ORDER_ID);
-        dishes = new ArrayList<>();
     }
 
     @Nullable
@@ -102,7 +101,7 @@ public class OrderDetailsListFragment extends Fragment {
                     String key = entry.getKey();
                     Dish value = entry.getValue();
                     dishes.add(value);
-                    adapter.addItem(value);
+                    //adapter.addItem(value);
                     Log.e("FIRST_DISH_NAME", "key: " + key + " value: " + value.getName());
                     adapter.notifyDataSetChanged();
                 }
