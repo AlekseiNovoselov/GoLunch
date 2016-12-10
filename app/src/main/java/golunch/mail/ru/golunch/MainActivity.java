@@ -7,11 +7,6 @@ import golunch.mail.ru.golunch.screens.organizations_list.OrganizationListFragme
 public class MainActivity extends NavigationActivity {
 
     @Override
-    protected Screen getScreen() {
-        return Screen.ORGANIZATION_LIST;
-    }
-
-    @Override
     protected void includeFragment() {
         FragmentTransaction fTran = this.getSupportFragmentManager().beginTransaction();
         OrganizationListFragment lobbyFragment = OrganizationListFragment.newInstance();

@@ -3,7 +3,6 @@ package golunch.mail.ru.golunch.screens.orders.order_list;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -29,9 +28,8 @@ import java.util.Map;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
 import golunch.mail.ru.golunch.firebase.FireBaseConfiguration;
-import golunch.mail.ru.golunch.screens.basket.Order;
+import golunch.mail.ru.golunch.screens.base.SingleActivity;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
-import golunch.mail.ru.golunch.screens.orders.details.OrderDetailsListFragment;
 import golunch.mail.ru.golunch.screens.organizations_list.OrganizationListFragment;
 
 public class OrderListFragment extends Fragment {
@@ -88,11 +86,7 @@ public class OrderListFragment extends Fragment {
 
                         String orderId = adapter.getOrders().get(position).getOrderId();
 
-                        FragmentTransaction fTran = getActivity().getSupportFragmentManager().beginTransaction();
-                        OrderDetailsListFragment basketFragment = OrderDetailsListFragment.newInstance(orderId);
-                        fTran.replace(R.id.content_main, basketFragment)
-                                .addToBackStack(null)
-                                .commit();
+                        ((SingleActivity) getActivity()).openOrderDetailsActivity(orderId);
                     }
 
                     @Override public void onLongItemClick(View view, int position) {

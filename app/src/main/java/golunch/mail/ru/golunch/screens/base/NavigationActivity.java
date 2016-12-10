@@ -1,51 +1,26 @@
 package golunch.mail.ru.golunch.screens.base;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-
-import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
-import golunch.mail.ru.golunch.screens.basket.BasketActivity;
-import golunch.mail.ru.golunch.screens.dish_item.DishActivity;
-import golunch.mail.ru.golunch.screens.dishes_list.Dish;
-import golunch.mail.ru.golunch.screens.dishes_list.DishesPagerActivity;
-import golunch.mail.ru.golunch.screens.orders.OrdersActivity;
-import golunch.mail.ru.golunch.screens.organization_item.OrganizationItemActivity;
-
-import static golunch.mail.ru.golunch.screens.dish_item.DishActivity.SELECTED_DISH;
-import static golunch.mail.ru.golunch.screens.dishes_list.DishesPagerActivity.CATEGORIES_LIST;
-import static golunch.mail.ru.golunch.screens.dishes_list.DishesPagerActivity.ORG_CAT;
-import static golunch.mail.ru.golunch.screens.dishes_list.DishesPagerActivity.ORG_CAT_LIST;
-import static golunch.mail.ru.golunch.screens.organization_item.OrganizationItemActivity.BANNER_NAME;
-import static golunch.mail.ru.golunch.screens.organization_item.OrganizationItemActivity.ORGANIZATION_NAME;
+import golunch.mail.ru.golunch.screens.orders.OrdersPagerFragment;
+import golunch.mail.ru.golunch.screens.organizations_list.OrganizationListFragment;
 
 public abstract class NavigationActivity extends SingleActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private Screen mScreen;
-
-    public enum Screen {
-        ORGANIZATION_LIST,
-        ORGANIZATION_ITEM,
-        DISHES_LIST,
-        DISH_ITEM,
-        BASKET,
-        ORDERS
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mScreen = getScreen();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_activity_main);
         setSupportActionBar(toolbar);
@@ -69,8 +44,6 @@ public abstract class NavigationActivity extends SingleActivity
         includeFragment();
     }
 
-    protected abstract Screen getScreen();
-
     protected abstract void includeFragment();
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -80,8 +53,11 @@ public abstract class NavigationActivity extends SingleActivity
         int id = item.getItemId();
 
         if (id == R.id.my_orders) {
-            openOrdersScreen();
-
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            FragmentTransaction fTran = this.getSupportFragmentManager().beginTransaction();
+            OrdersPagerFragment ordersPagerFragment = OrdersPagerFragment.newInstance();
+            fTran.replace(R.id.content_main, ordersPagerFragment)
+                    .commit();
         } else if (id == R.id.liked) {
 
         } else if (id == R.id.settings) {
@@ -89,20 +65,15 @@ public abstract class NavigationActivity extends SingleActivity
         } else if (id == R.id.login) {
 
         } else if (id == R.id.organizations) {
-            if (mScreen != Screen.ORGANIZATION_LIST) {
-                openOrganizationListScreen();
-            }
-        }
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            FragmentTransaction fTran = this.getSupportFragmentManager().beginTransaction();
+            OrganizationListFragment organizationListFragment = OrganizationListFragment.newInstance();
+            fTran.replace(R.id.content_main, organizationListFragment)
+                    .commit();}
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void openOrdersScreen() {
-        Intent intent = new Intent(this, OrdersActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
     }
 
     @Override
@@ -111,10 +82,6 @@ public abstract class NavigationActivity extends SingleActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            if (mScreen == Screen.ORDERS) {
-                openOrganizationListScreen();
-                return;
-            }
             super.onBackPressed();
         }
     }

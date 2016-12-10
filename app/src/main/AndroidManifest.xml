@@ -18,32 +18,38 @@
 
         <activity android:name=".MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
             android:name=".screens.organization_item.OrganizationItemActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".screens.dishes_list.DishesPagerActivity"
-            android:parentActivityName=".screens.organization_item.OrganizationItemActivity">
+            android:parentActivityName=".screens.organization_item.OrganizationItemActivity"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".screens.dish_item.DishActivity"
-            android:parentActivityName=".screens.dishes_list.DishesPagerActivity">
+            android:parentActivityName=".screens.dishes_list.DishesPagerActivity"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".screens.basket.BasketActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
-            android:name=".screens.orders.OrdersActivity"
-            android:parentActivityName=".MainActivity">
+            android:name=".screens.orders.details.OrderDetailsActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
         </activity>
 
 

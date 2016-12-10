@@ -2,7 +2,6 @@ package golunch.mail.ru.golunch.screens.base;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -17,12 +16,14 @@ import golunch.mail.ru.golunch.screens.basket.BasketActivity;
 import golunch.mail.ru.golunch.screens.dish_item.DishActivity;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
 import golunch.mail.ru.golunch.screens.dishes_list.DishesPagerActivity;
+import golunch.mail.ru.golunch.screens.orders.details.OrderDetailsActivity;
 import golunch.mail.ru.golunch.screens.organization_item.OrganizationItemActivity;
 
 import static golunch.mail.ru.golunch.screens.dish_item.DishActivity.SELECTED_DISH;
 import static golunch.mail.ru.golunch.screens.dishes_list.DishesPagerActivity.CATEGORIES_LIST;
 import static golunch.mail.ru.golunch.screens.dishes_list.DishesPagerActivity.ORG_CAT;
 import static golunch.mail.ru.golunch.screens.dishes_list.DishesPagerActivity.ORG_CAT_LIST;
+import static golunch.mail.ru.golunch.screens.orders.details.OrderDetailsActivity.ORDER_ID;
 import static golunch.mail.ru.golunch.screens.organization_item.OrganizationItemActivity.BANNER_NAME;
 import static golunch.mail.ru.golunch.screens.organization_item.OrganizationItemActivity.ORGANIZATION_NAME;
 
@@ -117,4 +118,11 @@ public abstract class SingleActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openOrderDetailsActivity(String orderId) {
+        Intent intent = new Intent(this, OrderDetailsActivity.class);
+        Bundle b = new Bundle();
+        b.putString(ORDER_ID, orderId);
+        intent.putExtras(b);
+        startActivity(intent);
+    }
 }

@@ -16,6 +16,7 @@ public class DishesPagerActivity extends SingleActivity {
 
     @Override
     protected void includeFragment() {
+
         Bundle intent = getIntent().getExtras();
         String orgCat = intent.getString(ORG_CAT);
         ArrayList<String> orgCatList = intent.getStringArrayList(ORG_CAT_LIST);
