@@ -17,10 +17,8 @@ import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.helper.BadgeHelper;
-import golunch.mail.ru.golunch.screens.base.NavigationActivity;
 import golunch.mail.ru.golunch.screens.base.SingleActivity;
 import golunch.mail.ru.golunch.screens.organization_item.pager.additional_info.AdditionalInfoFragment;
 import golunch.mail.ru.golunch.screens.organization_item.pager.feedback.FeedbackFragment;

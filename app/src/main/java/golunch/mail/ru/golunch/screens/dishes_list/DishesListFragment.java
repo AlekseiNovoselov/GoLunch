@@ -2,7 +2,6 @@ package golunch.mail.ru.golunch.screens.dishes_list;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,9 +13,7 @@ import com.google.firebase.database.DataSnapshot;
 import java.util.ArrayList;
 
 import golunch.mail.ru.golunch.R;
-import golunch.mail.ru.golunch.screens.base.NavigationActivity;
 import golunch.mail.ru.golunch.screens.base.SingleActivity;
-import golunch.mail.ru.golunch.screens.dish_item.DishItemFragment;
 import golunch.mail.ru.golunch.screens.organization_item.pager.BaseOrganizationFragment;
 import golunch.mail.ru.golunch.screens.organizations_list.OrganizationListFragment;
 

@@ -1,11 +1,9 @@
 package golunch.mail.ru.golunch.screens.organizations_list;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,16 +25,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
 import golunch.mail.ru.golunch.screens.base.NavigationActivity;
-import golunch.mail.ru.golunch.screens.orders.details.OrderDetailsListFragment;
-import golunch.mail.ru.golunch.screens.organization_item.OrganizationItemActivity;
-import golunch.mail.ru.golunch.screens.organization_item.OrganizationItemFragment;
-
-import static golunch.mail.ru.golunch.screens.organization_item.OrganizationItemActivity.BANNER_NAME;
-import static golunch.mail.ru.golunch.screens.organization_item.OrganizationItemActivity.ORGANIZATION_NAME;
 
 public class OrganizationListFragment extends Fragment {
 

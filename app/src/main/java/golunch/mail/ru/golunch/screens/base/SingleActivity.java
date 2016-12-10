@@ -11,7 +11,6 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
-import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.basket.BasketActivity;
@@ -90,12 +89,6 @@ public abstract class SingleActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    protected void openOrganizationListScreen() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-    }
-
     public void openOrganizationScreen(String organizationName, String bannerName) {
         Intent intent = new Intent(this, OrganizationItemActivity.class);
         Bundle b = new Bundle();
@@ -129,5 +122,13 @@ public abstract class SingleActivity extends AppCompatActivity {
         b.putString(ORDER_ID, orderId);
         intent.putExtras(b);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BadgeHelper badgeHelper;
+        badgeHelper = new BadgeHelper(this);
+        badgeHelper.updateBadge(BadgeHelper.BADGE.BASKET);
     }
 }
