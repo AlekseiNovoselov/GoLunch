@@ -24,6 +24,7 @@
 
         <activity
             android:name=".screens.organization_item.OrganizationItemActivity"
+            android:theme="@style/AppTheme.TransparentStatusBar"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
