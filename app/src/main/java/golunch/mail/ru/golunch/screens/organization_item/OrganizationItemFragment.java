@@ -21,6 +21,7 @@ import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.base.NavigationActivity;
+import golunch.mail.ru.golunch.screens.base.SingleActivity;
 import golunch.mail.ru.golunch.screens.organization_item.pager.additional_info.AdditionalInfoFragment;
 import golunch.mail.ru.golunch.screens.organization_item.pager.feedback.FeedbackFragment;
 import golunch.mail.ru.golunch.screens.organization_item.pager.menu.MenuFragment;
@@ -79,7 +80,7 @@ public class OrganizationItemFragment extends Fragment {
         View view = inflater.inflate(R.layout.org_item, null);
         banner = (ImageView) view.findViewById(R.id.banner);
 
-        new BadgeHelper((NavigationActivity) getActivity()).updateBadge(BadgeHelper.BADGE.SHOP);
+        new BadgeHelper((SingleActivity) getActivity()).updateBadge(BadgeHelper.BADGE.SHOP);
 
         pager = (ViewPager) view.findViewById(R.id.pager);
         pagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());

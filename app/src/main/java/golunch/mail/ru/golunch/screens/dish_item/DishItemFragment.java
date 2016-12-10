@@ -23,6 +23,7 @@ import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
 import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.base.NavigationActivity;
+import golunch.mail.ru.golunch.screens.base.SingleActivity;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
 
 import static golunch.mail.ru.golunch.firebase.FireBaseConfiguration.FIREBASE_DB_URL;
@@ -68,7 +69,7 @@ public class DishItemFragment extends Fragment {
         banner = (ImageView) view.findViewById(R.id.dishBanner);
 
         buyHelper = new BuyHelper(getContext());
-        badgeHelper = new BadgeHelper((NavigationActivity)getActivity());
+        badgeHelper = new BadgeHelper((SingleActivity)getActivity());
 
         mFullName = (TextView) view.findViewById(R.id.fullName);
         mPrice = (TextView) view.findViewById(R.id.price);

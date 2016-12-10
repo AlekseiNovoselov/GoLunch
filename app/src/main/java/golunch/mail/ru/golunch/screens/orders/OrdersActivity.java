@@ -4,14 +4,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import golunch.mail.ru.golunch.R;
-import golunch.mail.ru.golunch.screens.base.NavigationActivity;
+import golunch.mail.ru.golunch.screens.base.SingleActivity;
 
 
-public class OrdersActivity extends NavigationActivity {
-    @Override
-    protected Screen getScreen() {
-        return Screen.ORDERS;
-    }
+public class OrdersActivity extends SingleActivity {
 
     @Override
     protected void includeFragment() {

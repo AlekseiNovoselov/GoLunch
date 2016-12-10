@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.screens.base.NavigationActivity;
+import golunch.mail.ru.golunch.screens.base.SingleActivity;
 import golunch.mail.ru.golunch.screens.dishes_list.DishesPagerFragment;
 import golunch.mail.ru.golunch.screens.organization_item.pager.BaseOrganizationFragment;
 import golunch.mail.ru.golunch.screens.organizations_list.OrganizationListFragment;
@@ -63,7 +64,7 @@ public class MenuFragment extends BaseOrganizationFragment {
                             categoriesList.add(category.name);
                         }
 
-                        ((NavigationActivity) (getActivity())).openDishesListScreen(selectedOrgCat, orgCatList, categoriesList);
+                        ((SingleActivity) (getActivity())).openDishesListScreen(selectedOrgCat, orgCatList, categoriesList);
                     }
 
                     @Override public void onLongItemClick(View view, int position) {

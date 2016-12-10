@@ -30,6 +30,7 @@ import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
 import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.base.NavigationActivity;
+import golunch.mail.ru.golunch.screens.base.SingleActivity;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
 
 import static android.provider.CallLog.Calls.NEW;
@@ -73,7 +74,7 @@ public class BasketFragment extends Fragment {
 
         checkout = (Button) view.findViewById(R.id.checkout);
         warningMessageText = (TextView) view.findViewById(R.id.warningMessageText);
-        badgeHelper = new BadgeHelper((NavigationActivity) getActivity());
+        badgeHelper = new BadgeHelper((SingleActivity) getActivity());
         badgeHelper.updateBadge(BadgeHelper.BADGE.BASKET);
         rv = (RecyclerView) view.findViewById(R.id.rv);
 

@@ -4,17 +4,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 
 import golunch.mail.ru.golunch.R;
-import golunch.mail.ru.golunch.screens.base.NavigationActivity;
+import golunch.mail.ru.golunch.screens.base.SingleActivity;
 
-public class OrganizationItemActivity extends NavigationActivity {
+public class OrganizationItemActivity extends SingleActivity {
 
     public static final String ORGANIZATION_NAME = "ORGANIZATION_NAME";
     public static final String BANNER_NAME = "BANNER_NAME";
-
-    @Override
-    protected Screen getScreen() {
-        return Screen.ORGANIZATION_ITEM;
-    }
 
     @Override
     protected void includeFragment() {

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.screens.base.NavigationActivity;
+import golunch.mail.ru.golunch.screens.base.SingleActivity;
 import golunch.mail.ru.golunch.screens.dish_item.DishItemFragment;
 import golunch.mail.ru.golunch.screens.organization_item.pager.BaseOrganizationFragment;
 import golunch.mail.ru.golunch.screens.organizations_list.OrganizationListFragment;
@@ -74,7 +75,7 @@ public class DishesListFragment extends BaseOrganizationFragment {
                     @Override public void onItemClick(View view, int position) {
 
                         Dish dish = adapter.getDishes().get(position);
-                        ((NavigationActivity) getActivity()).openDishScreen(dish);
+                        ((SingleActivity) getActivity()).openDishScreen(dish);
                     }
 
                     @Override public void onLongItemClick(View view, int position) {

@@ -13,18 +13,19 @@ import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
 import golunch.mail.ru.golunch.screens.base.NavigationActivity;
+import golunch.mail.ru.golunch.screens.base.SingleActivity;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
 
 public class BadgeHelper {
 
-    private NavigationActivity mActivity;
+    private SingleActivity mActivity;
     private BuyHelper buyHelper;
 
     public enum BADGE {
         SHOP, BASKET
     }
 
-    public BadgeHelper(NavigationActivity activity) {
+    public BadgeHelper(SingleActivity activity) {
         mActivity = activity;
         buyHelper = new BuyHelper(mActivity);
     }

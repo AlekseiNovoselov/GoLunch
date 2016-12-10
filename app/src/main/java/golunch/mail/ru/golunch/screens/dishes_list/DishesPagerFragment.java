@@ -17,6 +17,7 @@ import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.base.NavigationActivity;
+import golunch.mail.ru.golunch.screens.base.SingleActivity;
 
 import static golunch.mail.ru.golunch.screens.dishes_list.DishesPagerActivity.CATEGORIES_LIST;
 import static golunch.mail.ru.golunch.screens.dishes_list.DishesPagerActivity.ORG_CAT;
@@ -48,7 +49,7 @@ public class DishesPagerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.dishes_pager, null);
-        new BadgeHelper((NavigationActivity) getActivity()).updateBadge(BadgeHelper.BADGE.SHOP);
+        new BadgeHelper((SingleActivity) getActivity()).updateBadge(BadgeHelper.BADGE.SHOP);
 
         orgCat = getArguments().getString(ORG_CAT);
         orgCatList = getArguments().getStringArrayList(ORG_CAT_LIST);
