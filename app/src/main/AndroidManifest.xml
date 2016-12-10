@@ -52,6 +52,11 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <activity
+            android:name=".screens.form_order.FormOrderActivity"
+            android:parentActivityName=".screens.basket.BasketActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
         <activity android:name=".AuthActivity"></activity>
 

@@ -31,19 +31,7 @@ import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.base.SingleActivity;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
 
-import static android.provider.CallLog.Calls.NEW;
-import static golunch.mail.ru.golunch.firebase.FireBaseConfiguration.ORDER_DISHES;
-import static golunch.mail.ru.golunch.firebase.FireBaseConfiguration.ORDER_CAFE_NAME;
-import static golunch.mail.ru.golunch.screens.orders.order_list.OrderListFragment.ORDER_STATE;
-
 public class BasketFragment extends Fragment {
-
-    public final static String LOG_TAG = BasketFragment.class.getSimpleName();
-
-    private FirebaseApp app;
-    private FirebaseDatabase database;
-    private FirebaseAuth auth;
-    private DatabaseReference databaseRef;
 
     private List<Dish> dishes;
     private BasketAdapter adapter;
@@ -108,105 +96,16 @@ public class BasketFragment extends Fragment {
         updateView();
         rv.setAdapter(adapter);
 
-        app = FirebaseApp.getInstance();
-        auth = FirebaseAuth.getInstance(app);
-
-        try {
-            database = FirebaseDatabase.getInstance(app);
-            FirebaseDatabase.getInstance(app).setPersistenceEnabled(true);
-        } catch (DatabaseException ex) {
-            Log.e("Catch", "DatabaseException:" + ex.toString());
-        }
-
-        databaseRef = database.getReference("orders");
-
-        auth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
-            public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
-                //Log.e(TAG, "onAuthStateChanged");
-                if (firebaseAuth.getCurrentUser() != null) {
-                    //Log.e(TAG, "CurrentUser != null");
-                }
-                else {
-                    Log.e("LexaLOG", "WARNING: CurrentUser == null");
-                }
-            }
-        });
-
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addDataToFireBase();
+                ((SingleActivity) getActivity()).openFormOrderScreen();
             }
         });
 
 
         return view;
     }
-
-    private void addDataToFireBase() {
-        final DatabaseReference ref = databaseRef.push();
-        Map<String, String> cafeField= new HashMap<>();
-        String organizationName = byuHelper.getCurrentOrganizationName();
-        if (organizationName == null) {
-            Log.e(LOG_TAG, "organizationName == null");
-            showErrorDialog("Не выбрано заведение");
-        }
-        if (dishes.size() == 0) {
-            showErrorDialog("Ничего не выбрано");
-        }
-        cafeField.put(ORDER_CAFE_NAME, organizationName);
-        cafeField.put(ORDER_STATE, NEW.toUpperCase());
-        ref.setValue(cafeField , new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                if (databaseError != null) {
-                    showErrorDialog(databaseError.getMessage());
-                } else {
-                    saveDishesList(ref);
-                }
-            }
-        });
-    }
-
-    private void saveDishesList(DatabaseReference ref) {
-        DatabaseReference dishesRef = ref.child(ORDER_DISHES);
-        final int[] j = {0};
-        final int dishesSize = dishes.size();
-        for(int i = 0; i < dishes.size(); i++) {
-            dishesRef.push().setValue(dishes.get(i), new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                    if (databaseError != null) {
-                        showErrorDialog(databaseError.getMessage());
-                    } else {
-                        Log.e(LOG_TAG, "Data saved successfully.");
-                        j[0]++;
-                        if (j[0] == dishesSize) {
-                            showSuccessDialog();
-                            clearOrderData();
-                        }
-                    }
-                }
-            });
-        }
-    }
-
-    private void clearOrderData() {
-        ArrayList<Dish> dishes = new ArrayList<>();
-        byuHelper.saveDishList(dishes);
-        adapter.clearData();
-        adapter.notifyDataSetChanged();
-        updateView();
-    }
-
-    private void showSuccessDialog() {
-        Toast.makeText(getContext(), "Заказ был успешно сохранен в 'Мои Заказы'", Toast.LENGTH_SHORT).show();
-    }
-
-    private void showErrorDialog(String errorMessage) {
-        Toast.makeText(getContext(), "Произошла ошибка при сохранении данных: " + errorMessage, Toast.LENGTH_SHORT).show();
-    }
-
 
     private void updateView() {
         if (dishes.size() == 0) {

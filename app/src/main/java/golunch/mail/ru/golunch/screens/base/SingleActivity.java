@@ -17,6 +17,7 @@ import golunch.mail.ru.golunch.screens.basket.BasketActivity;
 import golunch.mail.ru.golunch.screens.dish_item.DishActivity;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
 import golunch.mail.ru.golunch.screens.dishes_list.DishesPagerActivity;
+import golunch.mail.ru.golunch.screens.form_order.FormOrderActivity;
 import golunch.mail.ru.golunch.screens.orders.details.OrderDetailsActivity;
 import golunch.mail.ru.golunch.screens.organization_item.OrganizationItemActivity;
 
@@ -130,5 +131,10 @@ public abstract class SingleActivity extends AppCompatActivity {
         BadgeHelper badgeHelper;
         badgeHelper = new BadgeHelper(this);
         badgeHelper.updateBadge(BadgeHelper.BADGE.BASKET);
+    }
+
+    public void openFormOrderScreen() {
+        Intent intent = new Intent(this, FormOrderActivity.class);
+        startActivity(intent);
     }
 }
