@@ -1,9 +1,7 @@
 package golunch.mail.ru.golunch.screens.organization_item;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
-
-import golunch.mail.ru.golunch.R;
+import android.support.v4.app.Fragment;
 import golunch.mail.ru.golunch.screens.base.SingleActivity;
 
 public class OrganizationItemActivity extends SingleActivity {
@@ -12,13 +10,10 @@ public class OrganizationItemActivity extends SingleActivity {
     public static final String BANNER_NAME = "BANNER_NAME";
 
     @Override
-    protected void includeFragment() {
+    protected Fragment getFragment() {
         Bundle intent = getIntent().getExtras();
         String organizationName = intent.getString(ORGANIZATION_NAME);
         String bannerName = intent.getString(BANNER_NAME);
-        FragmentTransaction fTran = this.getSupportFragmentManager().beginTransaction();
-        OrganizationItemFragment lobbyFragment = OrganizationItemFragment.newInstance(organizationName, bannerName);
-        fTran.replace(R.id.content_main, lobbyFragment)
-                .commit();
+        return OrganizationItemFragment.newInstance(organizationName, bannerName);
     }
 }

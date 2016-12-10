@@ -41,10 +41,10 @@ public abstract class NavigationActivity extends SingleActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        includeFragment();
+        FragmentTransaction fTran = this.getSupportFragmentManager().beginTransaction();
+        fTran.replace(R.id.content_main, getFragment())
+                .commit();
     }
-
-    protected abstract void includeFragment();
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

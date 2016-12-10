@@ -2,6 +2,8 @@ package golunch.mail.ru.golunch.screens.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -44,10 +46,13 @@ public abstract class SingleActivity extends AppCompatActivity {
         if (getActionBar() != null) {
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        includeFragment();
+        FragmentTransaction fTran = this.getSupportFragmentManager().beginTransaction();
+        fTran.replace(R.id.content_main, getFragment())
+                .commit();
+
     }
 
-    protected abstract void includeFragment();
+    protected abstract Fragment getFragment();
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
