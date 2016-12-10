@@ -21,6 +21,32 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
+        <activity
+            android:name=".screens.organization_item.OrganizationItemActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
+
+        <activity
+            android:name=".screens.dishes_list.DishesPagerActivity"
+            android:parentActivityName=".screens.organization_item.OrganizationItemActivity">
+        </activity>
+
+        <activity
+            android:name=".screens.dish_item.DishActivity"
+            android:parentActivityName=".screens.dishes_list.DishesPagerActivity">
+        </activity>
+
+        <activity
+            android:name=".screens.basket.BasketActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
+
+        <activity
+            android:name=".screens.orders.OrdersActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
+
+
         <activity android:name=".AuthActivity"></activity>
 
     </application>

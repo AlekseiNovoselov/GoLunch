@@ -16,13 +16,13 @@ import java.util.ArrayList;
 import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.helper.BadgeHelper;
+import golunch.mail.ru.golunch.screens.base.NavigationActivity;
+
+import static golunch.mail.ru.golunch.screens.dishes_list.DishesPagerActivity.CATEGORIES_LIST;
+import static golunch.mail.ru.golunch.screens.dishes_list.DishesPagerActivity.ORG_CAT;
+import static golunch.mail.ru.golunch.screens.dishes_list.DishesPagerActivity.ORG_CAT_LIST;
 
 public class DishesPagerFragment extends Fragment {
-
-    public final static String ORG_CAT = "ORG_CAT";
-    public final static String ORG_CAT_LIST = "ORG_CAT_LIST";
-    public final static String CATEGORIES_LIST = "CATEGORIES_LIST";
-
 
     private ViewPager pager;
     private PagerAdapter pagerAdapter;
@@ -48,7 +48,7 @@ public class DishesPagerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.dishes_pager, null);
-        new BadgeHelper((MainActivity) getActivity()).updateBadge(BadgeHelper.BADGE.SHOP);
+        new BadgeHelper((NavigationActivity) getActivity()).updateBadge(BadgeHelper.BADGE.SHOP);
 
         orgCat = getArguments().getString(ORG_CAT);
         orgCatList = getArguments().getStringArrayList(ORG_CAT_LIST);
@@ -85,13 +85,4 @@ public class DishesPagerFragment extends Fragment {
         }
 
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        pagerAdapter = new DishesPagerFragment.MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
-        pager.setAdapter(pagerAdapter);
-        pagerAdapter.notifyDataSetChanged();
-    }
-
 }

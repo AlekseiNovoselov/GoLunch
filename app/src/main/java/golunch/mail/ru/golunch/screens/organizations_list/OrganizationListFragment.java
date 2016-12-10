@@ -1,6 +1,7 @@
 package golunch.mail.ru.golunch.screens.organizations_list;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -29,7 +30,13 @@ import java.util.List;
 import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
+import golunch.mail.ru.golunch.screens.base.NavigationActivity;
+import golunch.mail.ru.golunch.screens.orders.details.OrderDetailsListFragment;
+import golunch.mail.ru.golunch.screens.organization_item.OrganizationItemActivity;
 import golunch.mail.ru.golunch.screens.organization_item.OrganizationItemFragment;
+
+import static golunch.mail.ru.golunch.screens.organization_item.OrganizationItemActivity.BANNER_NAME;
+import static golunch.mail.ru.golunch.screens.organization_item.OrganizationItemActivity.ORGANIZATION_NAME;
 
 public class OrganizationListFragment extends Fragment {
 
@@ -67,11 +74,7 @@ public class OrganizationListFragment extends Fragment {
                         String bannerName = adapter.getOrganizations().get(position).bannerName;
                         buyHelper.saveSelectedOrganizationName(organizationName);
 
-                        FragmentTransaction fTran = getActivity().getSupportFragmentManager().beginTransaction();
-                        OrganizationItemFragment organizationItemFragment = OrganizationItemFragment.newInstance(organizationName, bannerName);
-                        fTran.replace(R.id.content_main, organizationItemFragment)
-                                .addToBackStack(null)
-                                .commit();
+                        ((NavigationActivity) getActivity()).openOrganizationScreen(organizationName, bannerName);
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
@@ -179,7 +182,7 @@ public class OrganizationListFragment extends Fragment {
 
     @Override
     public void onResume() {
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) ((MainActivity)getActivity()).findViewById(R.id.toolbar_activity_main);
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) (getActivity()).findViewById(R.id.toolbar_activity_main);
         toolbar.setTitle("Заведения");
         super.onResume();
     }

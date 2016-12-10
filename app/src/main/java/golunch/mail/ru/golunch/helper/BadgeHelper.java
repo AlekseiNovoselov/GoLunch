@@ -1,5 +1,6 @@
 package golunch.mail.ru.golunch.helper;
 
+import android.app.Activity;
 import android.graphics.Color;
 
 import com.mikepenz.actionitembadge.library.ActionItemBadge;
@@ -11,18 +12,19 @@ import java.util.List;
 import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
+import golunch.mail.ru.golunch.screens.base.NavigationActivity;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
 
 public class BadgeHelper {
 
-    private MainActivity mActivity;
+    private NavigationActivity mActivity;
     private BuyHelper buyHelper;
 
     public enum BADGE {
         SHOP, BASKET
     }
 
-    public BadgeHelper(MainActivity activity) {
+    public BadgeHelper(NavigationActivity activity) {
         mActivity = activity;
         buyHelper = new BuyHelper(mActivity);
     }

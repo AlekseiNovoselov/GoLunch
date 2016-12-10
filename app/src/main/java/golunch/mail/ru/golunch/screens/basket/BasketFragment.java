@@ -29,6 +29,7 @@ import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
 import golunch.mail.ru.golunch.helper.BadgeHelper;
+import golunch.mail.ru.golunch.screens.base.NavigationActivity;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
 
 import static android.provider.CallLog.Calls.NEW;
@@ -44,7 +45,6 @@ public class BasketFragment extends Fragment {
     private FirebaseDatabase database;
     private FirebaseAuth auth;
     private DatabaseReference databaseRef;
-
 
     private List<Dish> dishes;
     private BasketAdapter adapter;
@@ -73,7 +73,7 @@ public class BasketFragment extends Fragment {
 
         checkout = (Button) view.findViewById(R.id.checkout);
         warningMessageText = (TextView) view.findViewById(R.id.warningMessageText);
-        badgeHelper = new BadgeHelper((MainActivity) getActivity());
+        badgeHelper = new BadgeHelper((NavigationActivity) getActivity());
         badgeHelper.updateBadge(BadgeHelper.BADGE.BASKET);
         rv = (RecyclerView) view.findViewById(R.id.rv);
 
@@ -221,7 +221,7 @@ public class BasketFragment extends Fragment {
 
     @Override
     public void onResume() {
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) ((MainActivity)getActivity()).findViewById(R.id.toolbar_activity_main);
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) (getActivity()).findViewById(R.id.toolbar_activity_main);
         toolbar.setTitle("Корзина");
         super.onResume();
     }

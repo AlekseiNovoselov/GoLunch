@@ -22,9 +22,11 @@ import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.buy.BuyHelper;
 import golunch.mail.ru.golunch.helper.BadgeHelper;
+import golunch.mail.ru.golunch.screens.base.NavigationActivity;
 import golunch.mail.ru.golunch.screens.dishes_list.Dish;
 
 import static golunch.mail.ru.golunch.firebase.FireBaseConfiguration.FIREBASE_DB_URL;
+import static golunch.mail.ru.golunch.screens.dish_item.DishActivity.SELECTED_DISH;
 
 public class DishItemFragment extends Fragment {
 
@@ -38,7 +40,6 @@ public class DishItemFragment extends Fragment {
 
     private BadgeHelper badgeHelper;
 
-    private static final String SELECTED_DISH = "SELECTED_DISH";
     private Dish mDish;
     private BuyHelper buyHelper;
 
@@ -67,7 +68,7 @@ public class DishItemFragment extends Fragment {
         banner = (ImageView) view.findViewById(R.id.dishBanner);
 
         buyHelper = new BuyHelper(getContext());
-        badgeHelper = new BadgeHelper((MainActivity)getActivity());
+        badgeHelper = new BadgeHelper((NavigationActivity)getActivity());
 
         mFullName = (TextView) view.findViewById(R.id.fullName);
         mPrice = (TextView) view.findViewById(R.id.price);
@@ -111,7 +112,7 @@ public class DishItemFragment extends Fragment {
 
     @Override
     public void onResume() {
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) ((MainActivity)getActivity()).findViewById(R.id.toolbar_activity_main);
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) (getActivity()).findViewById(R.id.toolbar_activity_main);
         toolbar.setTitle(mDish.getName());
         super.onResume();
     }

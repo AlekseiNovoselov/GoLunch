@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import java.util.ArrayList;
 
 import golunch.mail.ru.golunch.R;
+import golunch.mail.ru.golunch.screens.base.NavigationActivity;
 import golunch.mail.ru.golunch.screens.dishes_list.DishesPagerFragment;
 import golunch.mail.ru.golunch.screens.organization_item.pager.BaseOrganizationFragment;
 import golunch.mail.ru.golunch.screens.organizations_list.OrganizationListFragment;
@@ -62,11 +63,7 @@ public class MenuFragment extends BaseOrganizationFragment {
                             categoriesList.add(category.name);
                         }
 
-                        FragmentTransaction fTran = getActivity().getSupportFragmentManager().beginTransaction();
-                        DishesPagerFragment dishesListFragment = DishesPagerFragment.newInstance(selectedOrgCat, orgCatList, categoriesList);
-                        fTran.replace(R.id.content_main, dishesListFragment)
-                                .addToBackStack(null)
-                                .commit();
+                        ((NavigationActivity) (getActivity())).openDishesListScreen(selectedOrgCat, orgCatList, categoriesList);
                     }
 
                     @Override public void onLongItemClick(View view, int position) {
