@@ -4,12 +4,13 @@
     <color name="colorPrimary">#F57102</color>
     <color name="colorPrimaryDark">#B75401</color>
     <color name="colorPrimaryLight">#F47102</color>
-    #F47102
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#F57102</color>
     <color name="colorTextLight">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="grey">#222222</color>
     <color name="light_grey">#555555</color>
     <color name="very_light_grey">#AAAAAA</color>
+    <color name="very_very_light_grey">#DDDDDD</color>
+    <color name="colorTextGrey">#EEEEEE</color>
 
 </resources>

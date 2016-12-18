@@ -1,22 +1,31 @@
 package golunch.mail.ru.golunch.screens.organization_item;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import golunch.mail.ru.golunch.MainActivity;
 import golunch.mail.ru.golunch.R;
 import golunch.mail.ru.golunch.helper.BadgeHelper;
 import golunch.mail.ru.golunch.screens.base.SingleActivity;
@@ -29,14 +38,17 @@ import static golunch.mail.ru.golunch.screens.organization_item.pager.BaseOrgani
 
 public class OrganizationItemFragment extends Fragment {
 
-    private static final int PAGE_COUNT = 3;
+    private static final int PAGE_COUNT = 2;
 
     private final static String BANNER_NAME = "BANNER_NAME";
 
-    ViewPager pager;
+    ViewPagerInScrollView pager;
+    NestedScrollView scrollView;
+    TabLayout pagerTabLayout;
     PagerAdapter pagerAdapter;
     private ImageView banner;
     private String bannerName;
+    private OrganizationItemActivity activity;
 
     String organizationName;
 
@@ -55,6 +67,8 @@ public class OrganizationItemFragment extends Fragment {
         super.onCreate(savedInstanceState);
         organizationName = getArguments().getString(ORGANIZATION_NAME);
         bannerName = getArguments().getString(BANNER_NAME);
+        activity = ((OrganizationItemActivity) getActivity());
+        // Ask Sergey for additional information about next aruments
     }
 
     @Override
@@ -64,7 +78,7 @@ public class OrganizationItemFragment extends Fragment {
         pager.setAdapter(pagerAdapter);
         pagerAdapter.notifyDataSetChanged();
 
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) (getActivity()).findViewById(R.id.toolbar_activity_main);
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) getActivity().findViewById(R.id.toolbar_activity_main);
         toolbar.setTitle(organizationName);
         super.onResume();
 
@@ -80,37 +94,18 @@ public class OrganizationItemFragment extends Fragment {
 
         new BadgeHelper((SingleActivity) getActivity()).updateBadge(BadgeHelper.BADGE.SHOP);
 
-        pager = (ViewPager) view.findViewById(R.id.pager);
-        pagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
+        pager = (ViewPagerInScrollView) view.findViewById(R.id.pager);
+        scrollView = (NestedScrollView) view.findViewById(R.id.orgItemScrollView);
+        pagerTabLayout = (TabLayout) view.findViewById(R.id.pagerTabStrip);
+        pagerAdapter = new MyFragmentPagerAdapter(getChildFragmentManager());
         pager.setAdapter(pagerAdapter);
+        pager.setOffscreenPageLimit(2);
         pagerAdapter.notifyDataSetChanged();
 
+        pagerTabLayout.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
         drawBanner();
 
-        pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-
-            @Override
-            public void onPageSelected(int position) {
-                //Log.d(TAG, "onPageSelected, position = " + position);
-                switch (position) {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                }
-            }
-
-            @Override
-            public void onPageScrolled(int position, float positionOffset,
-                                       int positionOffsetPixels) {
-                // critical Section for performance
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        pagerTabLayout.setupWithViewPager(pager);
 
         return view;
     }
@@ -133,7 +128,7 @@ public class OrganizationItemFragment extends Fragment {
     private class MyFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
         public MyFragmentPagerAdapter(FragmentManager fm) {
-            super(getActivity().getSupportFragmentManager());
+            super(fm);
         }
 
         @Override
@@ -141,9 +136,9 @@ public class OrganizationItemFragment extends Fragment {
             switch (position) {
                 case 0:
                     return MenuFragment.newInstance(organizationName);
+                /*case 1:
+                    return AdditionalInfoFragment.newInstance(organizationName);*/
                 case 1:
-                    return AdditionalInfoFragment.newInstance(organizationName);
-                case 2:
                     return FeedbackFragment.newInstance(organizationName);
                 default:
                     return MenuFragment.newInstance(organizationName);
@@ -160,9 +155,9 @@ public class OrganizationItemFragment extends Fragment {
             switch (position) {
                 case 0:
                     return "Меню";
+                /*case 1:
+                    return "Доп.Инфо";*/
                 case 1:
-                    return "Доп.Инфо";
-                case 2:
                     return "Отзывы";
                 default:
                     return "хз";

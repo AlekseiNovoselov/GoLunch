@@ -51,32 +51,10 @@ public class MenuFragment extends BaseOrganizationFragment {
         View view = inflater.inflate(R.layout.org_item_menu, null);
 
         final RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv2);
-        rv.addOnItemTouchListener(
-                new OrganizationListFragment.RecyclerItemClickListener(getContext(), rv ,new OrganizationListFragment.RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
-
-                        String selectedOrgCat = adapter.getCategories().get(position).orgCat;
-
-                        ArrayList<String> orgCatList = new ArrayList<>();
-                        ArrayList<String> categoriesList = new ArrayList<>();
-                        for (MenuCategory category : adapter.getCategories()) {
-                            orgCatList.add(category.orgCat);
-                            categoriesList.add(category.name);
-                        }
-
-                        ((SingleActivity) (getActivity())).openDishesListScreen(selectedOrgCat, orgCatList, categoriesList);
-                    }
-
-                    @Override public void onLongItemClick(View view, int position) {
-                        // do whatever
-                    }
-                })
-        );
-
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         rv.setLayoutManager(llm);
 
-        adapter = new MenuCategoryAdapter(menuItems, getContext());
+        adapter = new MenuCategoryAdapter(menuItems, getContext(), (SingleActivity)getActivity());
         rv.setAdapter(adapter);
 
         return view;

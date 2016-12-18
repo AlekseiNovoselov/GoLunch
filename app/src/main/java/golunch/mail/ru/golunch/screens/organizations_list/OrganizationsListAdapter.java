@@ -20,7 +20,7 @@ import golunch.mail.ru.golunch.R;
 import static golunch.mail.ru.golunch.firebase.FireBaseConfiguration.FIREBASE_DB_URL;
 
 
-public class OrganizationsListAdapter extends RecyclerView.Adapter<OrganizationsListAdapter.PersonViewHolder>{
+public class OrganizationsListAdapter extends RecyclerView.Adapter<OrganizationsListAdapter.OrgListViewHolder>{
 
     private List<Organization> organizations;
     private Context mContext;
@@ -39,15 +39,13 @@ public class OrganizationsListAdapter extends RecyclerView.Adapter<Organizations
     }
 
 
-    public static class PersonViewHolder extends RecyclerView.ViewHolder {
-        RecyclerView rv;
+    public static class OrgListViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         TextView description;
         ImageView photoName;
 
-        PersonViewHolder(View itemView) {
+        OrgListViewHolder(View itemView) {
             super(itemView);
-            rv = (RecyclerView) itemView.findViewById(R.id.rv);
             name = (TextView)itemView.findViewById(R.id.name);
             description = (TextView)itemView.findViewById(R.id.description);
             photoName = (ImageView)itemView.findViewById(R.id.photoName);
@@ -55,14 +53,14 @@ public class OrganizationsListAdapter extends RecyclerView.Adapter<Organizations
     }
 
     @Override
-    public PersonViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item, viewGroup, false);
-        PersonViewHolder pvh = new PersonViewHolder(v);
+    public OrgListViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.organisations_list_item, viewGroup, false);
+        OrgListViewHolder pvh = new OrgListViewHolder(v);
         return pvh;
     }
 
     @Override
-    public void onBindViewHolder(PersonViewHolder holder, int position) {
+    public void onBindViewHolder(OrgListViewHolder holder, int position) {
         holder.name.setText(organizations.get(position).name);
         holder.description.setText(organizations.get(position).description);
 

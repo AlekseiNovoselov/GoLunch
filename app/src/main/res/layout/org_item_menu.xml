@@ -1,14 +1,39 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="golunch.mail.ru.golunch.MainActivity">
+    android:orientation="vertical">
 
-
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@color/very_very_light_grey"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Столики"
+                android:layout_marginStart="30dp"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Заброниовать"
+            android:layout_marginEnd="30dp"
+            android:textAppearance="?android:textAppearanceButton"
+            android:textColor="@color/colorPrimary"
+            android:layout_gravity="end|center_vertical"/>
+    </FrameLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv2"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</RelativeLayout>
+</LinearLayout>

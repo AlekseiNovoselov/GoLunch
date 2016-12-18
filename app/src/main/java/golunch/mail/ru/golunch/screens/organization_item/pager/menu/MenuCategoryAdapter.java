@@ -16,6 +16,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import golunch.mail.ru.golunch.R;
+import golunch.mail.ru.golunch.screens.base.SingleActivity;
 
 import static golunch.mail.ru.golunch.firebase.FireBaseConfiguration.FIREBASE_DB_URL;
 
@@ -23,10 +24,12 @@ public class MenuCategoryAdapter extends RecyclerView.Adapter<MenuCategoryAdapte
 
     private ArrayList<MenuCategory> menuCategoties;
     private Context mContext;
+    private SingleActivity activity;
 
-    public MenuCategoryAdapter(ArrayList<MenuCategory> menuCategories, Context context){
+    public MenuCategoryAdapter(ArrayList<MenuCategory> menuCategories, Context context, SingleActivity activity){
         this.menuCategoties = menuCategories;
         mContext = context;
+        this.activity = activity;
     }
 
     public void addItem(MenuCategory item) {
@@ -46,7 +49,7 @@ public class MenuCategoryAdapter extends RecyclerView.Adapter<MenuCategoryAdapte
     }
 
     @Override
-    public void onBindViewHolder(MenuItemViewHolder holder, int position) {
+    public void onBindViewHolder(MenuItemViewHolder holder, final int position) {
         Log.e("LLL", "text:" + menuCategoties.get(position));
         holder.name.setText(menuCategoties.get(position).name);
 
@@ -60,8 +63,25 @@ public class MenuCategoryAdapter extends RecyclerView.Adapter<MenuCategoryAdapte
                     .load(storageReference)
                     .into(holder.icon);
         }
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String selectedOrgCat = getCategories().get(position).orgCat;
+
+                ArrayList<String> orgCatList = new ArrayList<>();
+                ArrayList<String> categoriesList = new ArrayList<>();
+                for (MenuCategory category : getCategories()) {
+                    orgCatList.add(category.orgCat);
+                    categoriesList.add(category.name);
+                }
+
+                activity.openDishesListScreen(selectedOrgCat, orgCatList, categoriesList);
+            }
+        });
 
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -69,13 +89,13 @@ public class MenuCategoryAdapter extends RecyclerView.Adapter<MenuCategoryAdapte
     }
 
     public static class MenuItemViewHolder extends RecyclerView.ViewHolder {
-        RecyclerView rv;
+        View view;
         ImageView icon;
         TextView name;
 
         MenuItemViewHolder(View itemView) {
             super(itemView);
-            rv = (RecyclerView) itemView.findViewById(R.id.rv);
+            view = itemView.findViewById(R.id.menu_item);
             icon = (ImageView) itemView.findViewById(R.id.icon);
             name = (TextView)itemView.findViewById(R.id.category_name);
         }
